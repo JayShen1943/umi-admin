@@ -11,13 +11,10 @@
     "baseUrl": "./",
     "strict": true,
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@@/*": [
-        "src/.umi/*"
-      ]
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"]
     },
+    "lib": ["dom", "esnext"], // 要包含在编译中的依赖库文件列表
     "allowSyntheticDefaultImports": true,
     "allowJs": true
   },
@@ -30,7 +27,7 @@
   ],
   "exclude": [
     "node_modules",
-    "lib",
+    // "lib",
     "es",
     "dist",
     "typings",

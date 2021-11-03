@@ -3,8 +3,9 @@
  * @Author: JayShen
  * @Date: 2021-10-30 11:22:40
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-01 10:30:36
+ * @LastEditTime: 2021-11-03 16:26:19
  */
+@primary-color: red; // 全局主色
 
 body,
 dl,
@@ -33,9 +34,13 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  padding: 0;
   /* color: @text-color; */
   /* font-size: 28px; */
+  background: #e2edff;
+}
+
+#root {
+  padding: 10px;
 }
 
 p,
@@ -68,4 +73,13 @@ ol,
 ul {
   list-style-position: outside;
   list-style-type: none;
+}
+
+// 清除浮动
+.clearfix::after {
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  content: '';
 }

@@ -1,50 +1,101 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 各种demo范例
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-10-30 10:59:30
+ * @LastEditTime: 2021-11-03 17:58:24
  */
-import { useEffect } from "react"
-import { Layout, Menu } from 'antd';
-const demo = () => {
-    useEffect(() => {
-        console.log('111111');
-    })
-    const { Header, Sider, Content } = Layout;
-    return (
-        <div>hooks组件
-            <Layout>
-                <Sider trigger={null} collapsible >
-                    <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1" >
-                            nav 1
-                        </Menu.Item>
-                        <Menu.Item key="2" >
-                            nav 2
-                        </Menu.Item>
-                        <Menu.Item key="3">
-                            nav 3
-                        </Menu.Item>
-                    </Menu>
-                </Sider>
-                <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ padding: 0 }}>
-                    </Header>
-                    <Content
-                        className="site-layout-background"
-                        style={{
-                            margin: '24px 16px',
-                            padding: 24,
-                            minHeight: 280,
-                        }}
-                    >
-                        Content
-                    </Content>
-                </Layout>
-            </Layout>
-        </div>
-    )
+import { useEffect, useState } from 'react';
+import { Layout, Menu, message } from 'antd';
+import { connect } from 'dva';
+import { demoA } from '@/services';
+import { useIntl, setLocale, getLocale, KeepAlive } from 'umi';
+interface List {
+  username: String;
 }
-export default demo
+const demo = (props: any) => {
+  const [list, setList] = useState<List[]>([]);
+  const intl = useIntl();
+  const [show, setShow] = useState(true);
+  const [isKeepAlive, setIsKeepAlive] = useState(true);
+  const { dispatch } = props;
+  const { color } = props.index;
+  const clickDemo = () => {
+    if (color === 'red') {
+      dispatch({
+        type: 'index/setCount', //指定哪个 model 层里面的哪个 方法
+        payload: { color: '#333' },
+        //需要传递到 model 层里面的参数。
+      });
+      localStorage.setItem('color', '#333');
+    } else {
+      dispatch({
+        type: 'index/setCount',
+        payload: { color: 'red' },
+      });
+      localStorage.setItem('color', 'red');
+    }
+  };
+  // 语言切换
+  const clickLang = () => {
+    if (getLocale() === 'zh-CN') {
+      setLocale('en-US', false);
+    } else {
+      setLocale('zh-CN', false);
+    }
+    console.log(getLocale());
+  };
+  return (
+    <div>
+      <div>
+        <h1>dva数据管理:</h1>
+        <button onClick={() => clickDemo()}>换颜色</button>当前颜色：{color}
+      </div>
+      <div style={{ margin: '30px 0px' }}>
+        <h1>国际化:</h1>
+        <button onClick={() => clickLang()}>换语言</button>
+        {intl.formatMessage(
+          { id: 'WELCOME_TO_UMI_WORLD' },
+          {
+            name: '变量：',
+          },
+        )}
+      </div>
+      <div>
+        <h1>keepAlive：{isKeepAlive ? '缓存开启' : '缓存关闭'}</h1>
+        <button onClick={() => setIsKeepAlive((isKeepAlive) => !isKeepAlive)}>
+          缓存开关
+        </button>
+        <button onClick={() => setShow((show) => !show)}>显示/隐藏</button>
+        {show && (
+          <KeepAlive when={isKeepAlive}>
+            <Counter />
+          </KeepAlive>
+        )}
+      </div>
+    </div>
+  );
+};
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>count: {count}</p>
+      <button onClick={() => setCount((count) => count + 1)}>Add</button>
+    </div>
+  );
+}
+// const mapStatetoprops = state => ({
+//     count: state.count
+// });
+
+// const actionCreater = {
+//     setCount: () => {
+//         return {
+//             type: "index/color",
+//             payload: '#555'
+//         }
+//     }
+// }
+// export default connect(mapStatetoprops, actionCreater)(demo);
+export default connect((index) => index)(demo);

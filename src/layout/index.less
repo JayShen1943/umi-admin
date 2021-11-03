@@ -1,0 +1,45 @@
+.layout-warp {
+  .header {
+    position: fixed;
+    left: 214px;
+    z-index: 1;
+    width: calc(100% - 224px);
+    height: 46px;
+
+    .header-menu {
+      height: 46px !important;
+      line-height: 46px;
+    }
+  }
+
+  .sider {
+    position: fixed;
+    left: 10px;
+    flex: 0 0 214px !important;
+    width: 214px !important;
+    min-width: 214px !important;
+    max-width: 214px !important;
+    height: calc(100% - 20px);
+    overflow: auto;
+    color: #fff;
+  }
+
+  .layout-right {
+    margin-top: 46px;
+    margin-left: 214px;
+    overflow: auto;
+    background: #e2edff;
+
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
+
+    // 内容部分和菜单的滚动条分离
+    .content {
+      height: calc(100vh - 66px);
+      padding: 10px 0px 10px 10px;
+    }
+  }
+}

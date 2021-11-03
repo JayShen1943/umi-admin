@@ -6,3 +6,7 @@ package.json
 .umi
 .umi-production
 .umi-test
+.umirc.dev
+.umirc.prod
+.umirc.test
+.umirc
