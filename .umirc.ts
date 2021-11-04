@@ -3,13 +3,17 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-03 14:41:11
+ * @LastEditTime: 2021-11-04 19:04:40
  */
 import { defineConfig } from 'umi';
+import { resolve } from 'path';
 import theme from './src/theme/baseStyle';
 import Routes from './src/routers';
-
 export default defineConfig({
+  // 别名配置
+  // alias: {
+  //   "@": resolve(__dirname, "./src"),
+  // },
   title: '得体云',
   nodeModulesTransform: {
     type: 'none',
@@ -18,7 +22,6 @@ export default defineConfig({
     //配置浏览器最低版本兼容ie11
     ie: 11,
   },
-  routes: Routes,
   fastRefresh: {},
   locale: {
     default: 'zh-CN',
@@ -38,8 +41,6 @@ export default defineConfig({
       name: 'keywords',
       content: 'umi, umijs',
     },
-    {
-      bar: 'foo',
-    },
   ],
+  routes: Routes,
 });

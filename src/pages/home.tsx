@@ -1,31 +1,36 @@
 /*
- * @Descripttion:
+ * @Descripttion:外部基础布局卡片盒子
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-03 19:45:54
+ * @LastEditTime: 2021-11-04 18:03:35
  */
-import './home.less';
-import { KeepAlive } from 'umi';
+import { history } from 'umi';
 import { useEffect, useState } from 'react';
-const Home = () => {
+import { string } from 'yargs';
+import { keepaliveLifeCycle, addKeeperListener } from 'react-keepalive-router';
+import { Button } from 'antd';
+import CommonBox from '@/components/CommonBox';
+const Home = (props: any) => {
   const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log('useEffect');
+  }, []);
+  addKeeperListener((history: any) => {
+    if (history.location.pathname === '/home') {
+      console.log('当前激活状态缓存组件：' + history, '1次');
+    }
+  });
   return (
     <>
-      <div className="top">筛选框</div>
-      <div className="main">
-        主体
-        <h1 style={{ margin: '190px 0px' }}>dva数据管理:</h1>
-        <h1 style={{ margin: '190px 0px' }}>dva数据管理:</h1>
-        <h1 style={{ margin: '190px 0px' }}>dva数据管理:</h1>
-        <h1 style={{ margin: '190px 0px' }}>dva数据管理:</h1>
-        <h1 style={{ margin: '190px 0px' }}>dva数据管理:</h1>
-      </div>
-
-      {/* <div>
-                <p>count: {count}</p>
-                <button onClick={() => setCount(count => count + 1)}>Add</button>
-            </div> */}
+      <CommonBox>
+        <div>
+          <p>count: {count}</p>
+          <Button onClick={() => setCount((count) => count + 1)} type="primary">
+            Add
+          </Button>
+        </div>
+      </CommonBox>
     </>
   );
 };

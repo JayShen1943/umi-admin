@@ -3,13 +3,19 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-03 17:58:24
+ * @LastEditTime: 2021-11-04 18:42:15
  */
 import { useEffect, useState } from 'react';
 import { Layout, Menu, message } from 'antd';
 import { connect } from 'dva';
 import { demoA } from '@/services';
-import { useIntl, setLocale, getLocale, KeepAlive } from 'umi';
+import { useIntl, setLocale, getLocale, history } from 'umi';
+import {
+  keepaliveLifeCycle,
+  withRouter,
+  actived,
+  addKeeperListener,
+} from 'react-keepalive-router';
 interface List {
   username: String;
 }
@@ -20,6 +26,11 @@ const demo = (props: any) => {
   const [isKeepAlive, setIsKeepAlive] = useState(true);
   const { dispatch } = props;
   const { color } = props.index;
+  useEffect(() => {
+    demoA({}).then(() => {
+      console.log(111);
+    });
+  }, []);
   const clickDemo = () => {
     if (color === 'red') {
       dispatch({
@@ -67,11 +78,6 @@ const demo = (props: any) => {
           缓存开关
         </button>
         <button onClick={() => setShow((show) => !show)}>显示/隐藏</button>
-        {show && (
-          <KeepAlive when={isKeepAlive}>
-            <Counter />
-          </KeepAlive>
-        )}
       </div>
     </div>
   );
