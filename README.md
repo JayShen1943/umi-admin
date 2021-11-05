@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 
+ * @Author: JayShen
+ * @Date: 2021-11-03 10:21:44
+ * @LastEditors: JayShen
+ * @LastEditTime: 2021-11-05 10:49:05
+-->
 
 ## project
 name: deti-cloud-web,
@@ -51,3 +58,14 @@ yarn build
 
 ```
 
+## 路由缓存功能实现和问题
+
+采用umi-plugin-keep-alive (https://github.com/alitajs/umi-plugin-keep-alive)
+
+是基于react-activation。遇到如下问题访问 https://github.com/CJY0208/react-activation/blob/master/README_CN.md
+
+1.Breaking Change 由实现原理引发的额外问题
+
+2.对 Context 的破坏性影响
+
+3.对依赖于 React 层级的功能造成影响

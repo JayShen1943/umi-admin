@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-04 20:06:09
+ * @LastEditTime: 2021-11-05 09:54:38
  */
 import { useEffect, useState } from 'react';
 import { Layout, Menu, message, Spin } from 'antd';
@@ -20,7 +20,7 @@ import CommonBox from '@/components/CommonBox';
 // import Demo from '@/pages/demo';
 // import Home from '@/pages/home'
 import './index.less';
-import { history, Link, Route, Switch } from 'umi';
+import { history, Link, Route, Switch, KeepAlive } from 'umi';
 import {
   KeepaliveRouterSwitch,
   KeepaliveRoute,
@@ -109,12 +109,13 @@ const LayoutPage = (props: any) => {
             </Menu>
           </Sider>
           <Layout className="layout-right">
-            <Content className="content">
-              {props.children}
-              {/* <KeepaliveRouterSwitch>
+            <KeepAlive when={true}>
+              <Content className="content">
+                {props.children}
+                {/* <KeepaliveRouterSwitch>
                   <Route key={'123'} path={'/demo'} exact={true} component={Home}></Route>
                 </KeepaliveRouterSwitch> */}
-              {/* <KeepaliveRouterSwitch withoutRoute>
+                {/* <KeepaliveRouterSwitch withoutRoute>
                   {
                     Routes[0].routes.map((item, index) => {
                       if (item.isKeepAlive) {
@@ -125,7 +126,8 @@ const LayoutPage = (props: any) => {
                     })
                   }
                 </KeepaliveRouterSwitch> */}
-            </Content>
+              </Content>
+            </KeepAlive>
           </Layout>
         </Layout>
       </Layout>
