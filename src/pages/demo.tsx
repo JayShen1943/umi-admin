@@ -3,12 +3,13 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 11:59:24
+ * @LastEditTime: 2021-11-05 17:02:30
  */
 import { useEffect, useState } from 'react';
-import { Layout, Menu, message } from 'antd';
+import { Button } from 'antd';
 import { connect } from 'dva';
 import { demoA } from '@/services';
+import CommonBox from '@/components/CommonBox';
 import {
   useIntl,
   setLocale,
@@ -17,22 +18,15 @@ import {
   useActivate,
   useUnactivate,
 } from 'umi';
-import {
-  keepaliveLifeCycle,
-  withRouter,
-  actived,
-  addKeeperListener,
-} from 'react-keepalive-router';
 interface List {
   username: String;
 }
 const Demo = (props: any) => {
   const [list, setList] = useState<List[]>([]);
   const intl = useIntl();
-  const [show, setShow] = useState(true);
-  const [isKeepAlive, setIsKeepAlive] = useState(true);
   const { dispatch } = props;
   const { color } = props.index;
+  const [count, setCount] = useState(0);
   // const color = 'red';
   useEffect(() => {
     demoA({}).then(() => {
@@ -66,11 +60,11 @@ const Demo = (props: any) => {
   };
   return (
     <div>
-      <div>
+      <CommonBox height="80px">
         <h1>dva数据管理:</h1>
         <button onClick={() => clickDemo()}>换颜色</button>当前颜色：{color}
-      </div>
-      <div style={{ margin: '30px 0px' }}>
+      </CommonBox>
+      <CommonBox marginGroup="30px 0px" height="80px">
         <h1>国际化:</h1>
         <button onClick={() => clickLang()}>换语言</button>
         {intl.formatMessage(
@@ -79,17 +73,19 @@ const Demo = (props: any) => {
             name: '变量：',
           },
         )}
-      </div>
-      <div>
-        <h1>keepAlive：{isKeepAlive ? '缓存开启' : '缓存关闭'}</h1>
-        <button onClick={() => setIsKeepAlive((isKeepAlive) => !isKeepAlive)}>
-          开关
+      </CommonBox>
+      <CommonBox height="100px">
+        <h1>keepAlive缓存:</h1>
+        <p>count: {count}</p>
+        <button onClick={() => setCount((count) => count + 1)} type="primary">
+          Add
         </button>
-      </div>
+      </CommonBox>
     </div>
   );
 };
 const Warp = (props: any) => {
+  // saveScrollPosition="screen" 保存容器滚动位置
   return (
     <KeepAlive>
       <Demo {...props} />

@@ -3,10 +3,15 @@
  * @Author: JayShen
  * @Date: 2021-11-02 16:08:09
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-04 18:59:24
+ * @LastEditTime: 2021-11-05 15:03:42
  */
 // import Home from '../pages/home'
 const routes = [
+  {
+    title: '登录',
+    path: '/login',
+    component: '@/pages/login',
+  },
   {
     title: '首页',
     path: '/',
@@ -32,20 +37,5 @@ const routes = [
       },
     ],
   },
-  // {
-  //   title: 'demo',
-  //   path: '/demo',
-  //   exact: true,
-  //   component: '@/pages/demo',
-  //   // customComponent: Demo
-  // },
-  // {
-  //   title: 'home',
-  //   path: '/home',
-  //   exact: true,
-  //   component: '@/pages/home',
-  //   // customComponent: Home,
-  //   isKeepAlive: true,
-  // },
 ];
 export default routes;

@@ -3,45 +3,53 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 11:47:50
+ * @LastEditTime: 2021-11-05 17:06:56
  */
-import {
-  history,
-  KeepAlive,
-  useActivate,
-  useUnactivate,
-  autoFixContext,
-} from 'umi';
-import { useEffect, useState } from 'react';
+import { history, KeepAlive, useActivate, useUnactivate } from 'umi';
+import { useEffect, useState, createContext } from 'react';
 import { Button } from 'antd';
 import CommonBox from '@/components/CommonBox';
+// import { autoFixContext } from 'react-activation'
+// autoFixContext(
+//   [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
+//   [require('react/jsx-dev-runtime'), 'jsx', 'jsxs', 'jsxDEV']
+// )
+const { Provider, Consumer } = createContext();
 const Home = (props: any) => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    console.log('useEffect');
-  }, []);
-  useActivate(() => {
-    console.log('进入keepAlive');
-  });
-  useUnactivate(() => {
-    console.log('离开keepAlive');
-  });
+  const [show, setShow] = useState(true);
+  const toggle = () => setShow((show) => !show);
   return (
     <>
-      <CommonBox>
-        <div>
-          <p>count: {count}</p>
-          <Button onClick={() => setCount((count) => count + 1)} type="primary">
-            Add
-          </Button>
-        </div>
-      </CommonBox>
+      <div>
+        <Provider value={'接受到参数'}>
+          {show && (
+            <KeepAlive name="Test">
+              <Consumer>
+                {(context) => <Test contextValue={context} />}
+              </Consumer>
+              {/* <Test /> */}
+            </KeepAlive>
+          )}
+          <button onClick={toggle}>显示/隐藏</button>
+        </Provider>
+      </div>
     </>
   );
 };
+function Test({ contextValue = null }) {
+  const [count1, setCount1] = useState(0);
+  return (
+    <div>
+      <p>count: {count1}</p>
+      <Button onClick={() => setCount1((count) => count + 1)} type="primary">
+        Add
+      </Button>
+      <p>contextValue: {contextValue}</p>
+    </div>
+  );
+}
 export default () => (
-  // saveScrollPosition="screen" 保存容器滚动位置
-  <KeepAlive>
-    <Home />
-  </KeepAlive>
+  // <KeepAlive>
+  <Home />
+  // </KeepAlive>
 );

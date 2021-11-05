@@ -3,11 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 09:54:38
+ * @LastEditTime: 2021-11-05 17:21:38
  */
 import { useEffect, useState } from 'react';
 import { Layout, Menu, message, Spin } from 'antd';
-import Routes from '@/routers';
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -17,16 +16,15 @@ import {
 } from '@ant-design/icons';
 import { connect } from 'dva';
 import CommonBox from '@/components/CommonBox';
-// import Demo from '@/pages/demo';
-// import Home from '@/pages/home'
 import './index.less';
 import { history, Link, Route, Switch, KeepAlive } from 'umi';
-import {
-  KeepaliveRouterSwitch,
-  KeepaliveRoute,
-  addKeeperListener,
-} from 'react-keepalive-router';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { autoFixContext } from 'react-activation';
+// 自动修复特定版本Context数据共享问题 (勿删！！！)
+autoFixContext(
+  [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
+  [require('react/jsx-dev-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
+);
+
 const menuList = [
   {
     name: '菜单1',
@@ -110,23 +108,7 @@ const LayoutPage = (props: any) => {
           </Sider>
           <Layout className="layout-right">
             <KeepAlive when={true}>
-              <Content className="content">
-                {props.children}
-                {/* <KeepaliveRouterSwitch>
-                  <Route key={'123'} path={'/demo'} exact={true} component={Home}></Route>
-                </KeepaliveRouterSwitch> */}
-                {/* <KeepaliveRouterSwitch withoutRoute>
-                  {
-                    Routes[0].routes.map((item, index) => {
-                      if (item.isKeepAlive) {
-                        return <KeepaliveRoute key={index} path={item.path} component={item.component} exact={item.exact} />
-                      } else {
-                        return (<Route key={index} path={item.path} exact={item.exact} component={() => require(item.component)}></Route>)
-                      }
-                    })
-                  }
-                </KeepaliveRouterSwitch> */}
-              </Content>
+              <Content className="content">{props.children}</Content>
             </KeepAlive>
           </Layout>
         </Layout>
