@@ -3,11 +3,11 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 17:02:30
+ * @LastEditTime: 2021-11-06 01:23:56
  */
 import { useEffect, useState } from 'react';
 import { Button } from 'antd';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import { demoA } from '@/services';
 import CommonBox from '@/components/CommonBox';
 import {
@@ -92,4 +92,10 @@ const Warp = (props: any) => {
     </KeepAlive>
   );
 };
+// 写法一 ：
 export default connect((index) => index)(Warp);
+
+// 写法二
+// export default connect(({ index }) => ({
+//   index,
+// }))(Warp);

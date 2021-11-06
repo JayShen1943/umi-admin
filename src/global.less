@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 11:22:40
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-03 16:26:19
+ * @LastEditTime: 2021-11-06 01:38:17
  */
 @primary-color: red; // 全局主色
 
@@ -14,7 +14,12 @@ dd,
 ul,
 ol,
 li,
-pre,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 pre,
 form,
 fieldset,
 input,
@@ -41,17 +46,17 @@ body,
 
 #root {
   padding: 10px;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  padding: 0;
+  &::before {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    z-index: 10;
+    display: block;
+    width: 100vw;
+    height: 10px;
+    background: #e2edff;
+    content: '';
+  }
 }
 
 fieldset,

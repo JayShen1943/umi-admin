@@ -3,22 +3,22 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 17:21:38
+ * @LastEditTime: 2021-11-06 04:46:20
  */
 import { useEffect, useState } from 'react';
-import { Layout, Menu, message, Spin } from 'antd';
+import { Layout, Menu, message, Spin, Button } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { connect } from 'dva';
 import CommonBox from '@/components/CommonBox';
 import './index.less';
-import { history, Link, Route, Switch, KeepAlive } from 'umi';
+import { history, Link, Route, Switch, KeepAlive, connect } from 'umi';
 import { autoFixContext } from 'react-activation';
+import Logo from '@/assets/iconImage/logo.png';
 // 自动修复特定版本Context数据共享问题 (勿删！！！)
 autoFixContext(
   [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
@@ -46,12 +46,105 @@ const menuList = [
     path: '/demo',
     icon: <PieChartOutlined />,
   },
+  {
+    name: '菜单2',
+    path: '/demoa2',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demoa1',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demoa3',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo4',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo5',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo6',
+    icon: <PieChartOutlined />,
+  },
+
+  {
+    name: '菜单2',
+    path: '/demo7',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demoa8',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demoa9',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demoa13',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo14',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo15',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo16',
+    icon: <PieChartOutlined />,
+  },
+
+  {
+    name: '菜单2',
+    path: '/demoa19',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demoa20',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo24',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo25',
+    icon: <PieChartOutlined />,
+  },
+  {
+    name: '菜单2',
+    path: '/demo26',
+    icon: <PieChartOutlined />,
+  },
 ];
 const { Content, Footer, Sider, Header } = Layout;
 const { SubMenu } = Menu;
 const LayoutPage = (props: any) => {
   const layoutLoading = false;
   const pageLoading = false;
+  const [collapsed, setCollapsed] = useState(false);
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
   const { dispatch } = props;
   const { color } = props.index;
@@ -62,8 +155,11 @@ const LayoutPage = (props: any) => {
   return (
     <Spin spinning={layoutLoading}>
       <Layout className="layout-warp">
-        <Header className="header">
-          <div className="logo" />
+        <Header
+          className={
+            'header' + ' ' + `${leftSiderCollapsed ? 'header__collapsed' : ''}`
+          }
+        >
           <Menu
             className="header-menu"
             theme="dark"
@@ -75,12 +171,29 @@ const LayoutPage = (props: any) => {
           </Menu>
         </Header>
         <Layout>
+          <div
+            className={
+              'sider-warp' +
+              ' ' +
+              `${leftSiderCollapsed ? 'sider-warp__collapsed' : ''}`
+            }
+          ></div>
+          {/*   collapsible */}
           <Sider
             className="sider"
             collapsed={leftSiderCollapsed}
+            collapsedWidth="50"
             onCollapse={() => setLeftSiderCollapsed((t) => !t)}
           >
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+            <div className="logo-warp">
+              <img src={Logo} alt="logo" />
+            </div>
+            <Menu
+              theme="light"
+              defaultSelectedKeys={['1']}
+              mode="inline"
+              className="left-menu"
+            >
               {menuList.map((item: any, index) => {
                 if (item.children) {
                   return (
@@ -105,7 +218,20 @@ const LayoutPage = (props: any) => {
                 }
               })}
             </Menu>
+            <div
+              className="button-wapr"
+              onClick={() => setLeftSiderCollapsed((t) => !t)}
+            >
+              <Button type="primary" size="middle" className="bottom-btn">
+                {leftSiderCollapsed ? (
+                  <MenuUnfoldOutlined />
+                ) : (
+                  <MenuFoldOutlined />
+                )}
+              </Button>
+            </div>
           </Sider>
+
           <Layout className="layout-right">
             <KeepAlive when={true}>
               <Content className="content">{props.children}</Content>
