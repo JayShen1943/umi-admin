@@ -3,11 +3,11 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-06 01:23:56
+ * @LastEditTime: 2021-11-08 17:03:01
  */
 import { useEffect, useState } from 'react';
 import { Button } from 'antd';
-import { connect } from 'umi';
+import { connect, useStore, useSelector, useDispatch } from 'umi';
 import { demoA } from '@/services';
 import CommonBox from '@/components/CommonBox';
 import {
@@ -24,14 +24,19 @@ interface List {
 const Demo = (props: any) => {
   const [list, setList] = useState<List[]>([]);
   const intl = useIntl();
-  const { dispatch } = props;
-  const { color } = props.index;
   const [count, setCount] = useState(0);
-  // const color = 'red';
+  // connect写法
+  // const { dispatch } = props;
+  // const { color } = props.index;
+
+  // hooks写法 获取所有model
+  const state = useStore();
+  const dispatch = useDispatch();
+  const { color } = state.getState().index;
+  const { userInfo } = state.getState().globalInfo;
+
   useEffect(() => {
-    demoA({}).then(() => {
-      console.log(111);
-    });
+    demoA({}).then(() => {});
   }, []);
   const clickDemo = () => {
     if (color === 'red') {
@@ -58,11 +63,28 @@ const Demo = (props: any) => {
     }
     console.log(getLocale());
   };
+  const globalClick = () => {
+    dispatch({
+      type: 'globalInfo/setUserInfo',
+      payload: {
+        name: '周杰伦',
+        age: 11,
+        phone: 123344,
+      },
+    });
+  };
   return (
     <div>
       <CommonBox height="80px">
         <h1>dva数据管理:</h1>
         <button onClick={() => clickDemo()}>换颜色</button>当前颜色：{color}
+      </CommonBox>
+      <CommonBox marginGroup="30px 0px">
+        <h1>dva数据管理（hooks）:</h1>
+        <button onClick={() => globalClick()}>个人信息修改</button>
+        <div>name：{userInfo.name}</div>
+        <div>age：{userInfo.age}</div>
+        <div>phone：{userInfo.phone}</div>
       </CommonBox>
       <CommonBox marginGroup="30px 0px" height="80px">
         <h1>国际化:</h1>
@@ -77,9 +99,7 @@ const Demo = (props: any) => {
       <CommonBox height="100px">
         <h1>keepAlive缓存:</h1>
         <p>count: {count}</p>
-        <button onClick={() => setCount((count) => count + 1)} type="primary">
-          Add
-        </button>
+        <button onClick={() => setCount((count) => count + 1)}>Add</button>
       </CommonBox>
     </div>
   );
@@ -92,10 +112,20 @@ const Warp = (props: any) => {
     </KeepAlive>
   );
 };
+
+// 搭配hooks写法
+export default Warp;
+
 // 写法一 ：
-export default connect((index) => index)(Warp);
+// export default connect((index) => index)(Warp);
 
 // 写法二
 // export default connect(({ index }) => ({
 //   index,
 // }))(Warp);
+
+// 写法三
+// function mapStateToProps(state: any) {
+//   return { todos: state.color };
+// }
+// export default connect(mapStateToProps)(Warp);

@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-06 04:46:20
+ * @LastEditTime: 2021-11-08 10:07:47
  */
 import { useEffect, useState } from 'react';
 import { Layout, Menu, message, Spin, Button } from 'antd';
@@ -18,7 +18,8 @@ import CommonBox from '@/components/CommonBox';
 import './index.less';
 import { history, Link, Route, Switch, KeepAlive, connect } from 'umi';
 import { autoFixContext } from 'react-activation';
-import Logo from '@/assets/iconImage/logo.png';
+import LogoText from '@/assets/iconImage/logoText.png';
+import LogoOnly from '@/assets/iconImage/logoOnly.png';
 // 自动修复特定版本Context数据共享问题 (勿删！！！)
 autoFixContext(
   [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
@@ -178,16 +179,22 @@ const LayoutPage = (props: any) => {
               `${leftSiderCollapsed ? 'sider-warp__collapsed' : ''}`
             }
           ></div>
-          {/*   collapsible */}
           <Sider
             className="sider"
             collapsed={leftSiderCollapsed}
             collapsedWidth="50"
             onCollapse={() => setLeftSiderCollapsed((t) => !t)}
           >
-            <div className="logo-warp">
-              <img src={Logo} alt="logo" />
-            </div>
+            {leftSiderCollapsed ? (
+              <div className="logo-warp is-center">
+                <img src={LogoOnly} alt="logo" className="logo-only" />
+              </div>
+            ) : (
+              <div className="logo-warp">
+                <img src={LogoText} alt="logo" className="logo-text" />
+              </div>
+            )}
+
             <Menu
               theme="light"
               defaultSelectedKeys={['1']}

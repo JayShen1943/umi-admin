@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-04 13:20:59
+ * @LastEditTime: 2021-11-08 17:03:37
  */
 import './index.less';
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 }
 const CommonBox = (props: Props) => {
   const {
-    height = '200px',
+    height,
     minHeight,
     marginGroup,
     paddingGroup = '10px',
