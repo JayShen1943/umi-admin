@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-08 17:03:01
+ * @LastEditTime: 2021-11-10 13:19:49
  */
 import { useEffect, useState } from 'react';
 import { Button } from 'antd';
@@ -33,7 +33,7 @@ const Demo = (props: any) => {
   const state = useStore();
   const dispatch = useDispatch();
   const { color } = state.getState().index;
-  const { userInfo } = state.getState().globalInfo;
+  const { userInfo } = state.getState().globalModel;
 
   useEffect(() => {
     demoA({}).then(() => {});
@@ -61,23 +61,34 @@ const Demo = (props: any) => {
     } else {
       setLocale('zh-CN', false);
     }
-    console.log(getLocale());
   };
   const globalClick = () => {
-    dispatch({
-      type: 'globalInfo/setUserInfo',
-      payload: {
-        name: '周杰伦',
-        age: 11,
-        phone: 123344,
-      },
-    });
+    if (userInfo.name === '周杰伦') {
+      dispatch({
+        type: 'globalModel/setUserInfo',
+        payload: {
+          name: '张国荣',
+          age: 40,
+          phone: 888888,
+        },
+      });
+    } else {
+      dispatch({
+        type: 'globalModel/setUserInfo',
+        payload: {
+          name: '周杰伦',
+          age: 30,
+          phone: 66666,
+        },
+      });
+    }
   };
   return (
     <div>
       <CommonBox height="80px">
         <h1>dva数据管理:</h1>
         <button onClick={() => clickDemo()}>换颜色</button>当前颜色：{color}
+        <div className="box">11</div>
       </CommonBox>
       <CommonBox marginGroup="30px 0px">
         <h1>dva数据管理（hooks）:</h1>
@@ -100,6 +111,10 @@ const Demo = (props: any) => {
         <h1>keepAlive缓存:</h1>
         <p>count: {count}</p>
         <button onClick={() => setCount((count) => count + 1)}>Add</button>
+        <Button type="primary" size="middle">
+          {' '}
+          确定
+        </Button>
       </CommonBox>
     </div>
   );

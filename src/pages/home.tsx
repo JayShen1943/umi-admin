@@ -3,17 +3,12 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 17:06:56
+ * @LastEditTime: 2021-11-09 11:35:48
  */
 import { history, KeepAlive, useActivate, useUnactivate } from 'umi';
 import { useEffect, useState, createContext } from 'react';
 import { Button } from 'antd';
 import CommonBox from '@/components/CommonBox';
-// import { autoFixContext } from 'react-activation'
-// autoFixContext(
-//   [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
-//   [require('react/jsx-dev-runtime'), 'jsx', 'jsxs', 'jsxDEV']
-// )
 const { Provider, Consumer } = createContext();
 const Home = (props: any) => {
   const [show, setShow] = useState(true);

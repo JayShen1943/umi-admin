@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-04 11:18:53
+ * @LastEditTime: 2021-11-10 10:58:42
  */
 declare module '*.css';
 declare module '*.less';
@@ -19,5 +19,5 @@ declare module '*.svg' {
 declare const CURRENT_ENV: 'dev' | 'test' | 'pord';
 // 声明当前的请求路径
 declare const BASE_URL: string;
-// react实现keepAlive插件
-declare module 'react-keepalive-router';
+// less-> js
+declare module 'less-vars-to-js';

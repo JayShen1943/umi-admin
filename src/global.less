@@ -3,9 +3,8 @@
  * @Author: JayShen
  * @Date: 2021-10-30 11:22:40
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-06 01:38:17
+ * @LastEditTime: 2021-11-10 11:59:47
  */
-@primary-color: red; // 全局主色
 
 body,
 dl,
@@ -46,6 +45,7 @@ body,
 
 #root {
   padding: 10px;
+
   &::before {
     position: fixed;
     top: 0px;
@@ -87,4 +87,17 @@ ul {
   height: 0;
   visibility: hidden;
   content: '';
+}
+
+/**
+ * 全局antd 按钮
+ */
+.ant-btn {
+  border-radius: 6px !important;
+
+  // &-primary:focus {
+  //   color: #fff;
+  //   border-color: @primary-color;
+  //   background: @primary-color;
+  // }
 }
