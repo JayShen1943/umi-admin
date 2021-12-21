@@ -7,9 +7,9 @@
 -->
 
 ## project
-name: deti-cloud-web,
+name: admin,
 version: 1.0.0,
-description: 得体云,
+description: 管理后台模板,
 author : JayShen,
 Umi3.5 + React17.x + TypeScript4.1.2 + Antd4.0.0
 
