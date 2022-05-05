@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 16:08:09
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 15:03:42
+ * @LastEditTime: 2022-05-05 15:08:16
  */
 // import Home from '../pages/home'
 const routes = [
@@ -24,7 +24,6 @@ const routes = [
         path: '/demo',
         exact: true,
         component: '@/pages/demo',
-        isKeepAlive: false,
         // customComponent: Demo
       },
       {
@@ -33,7 +32,6 @@ const routes = [
         exact: true,
         component: '@/pages/home',
         // customComponent: Home,
-        isKeepAlive: false,
       },
     ],
   },

@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-10 13:19:49
+ * @LastEditTime: 2022-05-05 15:19:23
  */
 import { useEffect, useState } from 'react';
 import { Button } from 'antd';
@@ -122,9 +122,9 @@ const Demo = (props: any) => {
 const Warp = (props: any) => {
   // saveScrollPosition="screen" 保存容器滚动位置
   return (
-    <KeepAlive>
-      <Demo {...props} />
-    </KeepAlive>
+    // <KeepAlive>
+    <Demo {...props} />
+    // </KeepAlive>
   );
 };
 

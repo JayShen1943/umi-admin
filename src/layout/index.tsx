@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-10 10:00:28
+ * @LastEditTime: 2022-05-05 15:28:13
  */
 import { useEffect, useState } from 'react';
 import { Layout, Menu, message, Spin, Button } from 'antd';
@@ -36,10 +36,6 @@ const menuList = [
         name: '子菜单1',
         path: '/home',
       },
-      {
-        name: '子菜单2',
-        path: '/demo',
-      },
     ],
   },
   {
@@ -47,108 +43,12 @@ const menuList = [
     path: '/demo',
     icon: <PieChartOutlined />,
   },
-  {
-    name: '菜单2',
-    path: '/demoa2',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demoa1',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demoa3',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo4',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo5',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo6',
-    icon: <PieChartOutlined />,
-  },
-
-  {
-    name: '菜单2',
-    path: '/demo7',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demoa8',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demoa9',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demoa13',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo14',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo15',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo16',
-    icon: <PieChartOutlined />,
-  },
-
-  {
-    name: '菜单2',
-    path: '/demoa19',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demoa20',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo24',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo25',
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: '菜单2',
-    path: '/demo26',
-    icon: <PieChartOutlined />,
-  },
 ];
 const { Content, Footer, Sider, Header } = Layout;
 const { SubMenu } = Menu;
 const LayoutPage = (props: any) => {
   const layoutLoading = false;
-  const pageLoading = false;
-  const [collapsed, setCollapsed] = useState(false);
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
-  const { dispatch } = props;
-  const { color } = props.index;
   const goDtail = (url: string) => {
     history.push(url);
   };
@@ -240,9 +140,7 @@ const LayoutPage = (props: any) => {
           </Sider>
 
           <Layout className="layout-right">
-            <KeepAlive when={true}>
-              <Content className="content">{props.children}</Content>
-            </KeepAlive>
+            <Content className="content">{props.children}</Content>
           </Layout>
         </Layout>
       </Layout>
