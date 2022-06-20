@@ -3,21 +3,13 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-05-05 15:19:23
+ * @LastEditTime: 2022-06-20 09:06:31
  */
-import { useEffect, useState } from 'react';
-import { Button } from 'antd';
-import { connect, useStore, useSelector, useDispatch } from 'umi';
-import { demoA } from '@/services';
 import CommonBox from '@/components/CommonBox';
-import {
-  useIntl,
-  setLocale,
-  getLocale,
-  KeepAlive,
-  useActivate,
-  useUnactivate,
-} from 'umi';
+import { demoA } from '@/services';
+import { Button } from 'antd';
+import { useEffect, useState } from 'react';
+import { getLocale, setLocale, useDispatch, useIntl, useStore } from 'umi';
 interface List {
   username: String;
 }
@@ -37,6 +29,11 @@ const Demo = (props: any) => {
 
   useEffect(() => {
     demoA({}).then(() => {});
+    let a = 1;
+    let b = 2;
+    if (a == b) {
+      console.log('11');
+    }
   }, []);
   const clickDemo = () => {
     if (color === 'red') {
