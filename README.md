@@ -1,15 +1,15 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: README
  * @Author: JayShen
- * @Date: 2021-11-03 10:21:44
+ * @Date: 2022-06-20 08:47:00
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-05 10:49:05
+ * @LastEditTime: 2022-06-20 10:32:34
 -->
 
 ## project
-name: admin,
+name: deti-mes,
 version: 1.0.0,
-description: 管理后台模板,
+description: 得体智造前台,
 author : JayShen,
 Umi3.5 + React17.x + TypeScript4.1.2 + Antd4.0.0
 
@@ -27,7 +27,12 @@ yarn build:test
 
 # 生产环境打包 CURRENT_ENV=prod
 yarn build
+
+# ESlint 检查错误并适当修复
+yarn lint
+
 ```
+
 
 ## Directory tree
 
@@ -50,8 +55,6 @@ yarn build
 ├── .eslintignore                   // eslint 忽略文件
 ├── .eslintrc.js                    // eslint 配置文件
 ├── .gitignore                      // git 忽略的文件
-├── .prettierignore                 // Prettier 忽略的文件
-├── .prettierrc.js                  // Prettier 代码格式化配置文件 
 ├── tsconfig.jso                    // ts 配置文件
 ├── package.json                    // npm 依赖记录文件
 ├── yarn.lock                       // yarn 版本锁定文件

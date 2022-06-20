@@ -1,0 +1,10 @@
+public
+dist
+models
+.umirc.ts
+.umi.dev.ts
+.umi.prod.ts
+.umi.test.ts
+mock
+.eslintrc.js
+typings.d.ts

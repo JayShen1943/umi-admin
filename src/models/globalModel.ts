@@ -3,10 +3,11 @@
  * @Author: JayShen
  * @Date: 2021-11-03 10:48:09
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-09 16:41:45
+ * @LastEditTime: 2022-06-20 10:24:46
  */
 
-import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
+import type { Effect, ImmerReducer } from 'umi';
+// import { Reducer, Subscription } from 'umi';
 export interface GlobalModelState {
   userInfo: any;
 }
@@ -42,7 +43,7 @@ const GlobalModel: GlobalModelType = {
     },
   }, // 管理同步方法，必须是纯函数
   effects: {
-    *query({ payload }, { call, put }) {},
+    *query({ payload }, { call, put }) { },
   }, // 管理异步操作，采用了 generator 的相关概念
   subscriptions: {}, // 订阅数据源
 };

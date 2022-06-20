@@ -9,7 +9,7 @@
 
 # production
 /dist
-
+/mocK
 # misc
 .DS_Store
 

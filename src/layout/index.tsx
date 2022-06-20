@@ -3,20 +3,18 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-05-05 15:28:13
+ * @LastEditTime: 2022-06-20 20:03:58
  */
-import { useEffect, useState } from 'react';
-import { Layout, Menu, message, Spin, Button } from 'antd';
+import { useState } from 'react';
+import { Layout, Menu, Spin, Button } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
-import CommonBox from '@/components/CommonBox';
 import './index.less';
-import { history, Link, Route, Switch, KeepAlive, connect } from 'umi';
+import { Link, connect } from 'umi';
 import { autoFixContext } from 'react-activation';
 import LogoText from '@/assets/iconImage/logoText.png';
 import LogoOnly from '@/assets/iconImage/logoOnly.png';
@@ -34,7 +32,7 @@ const menuList = [
     children: [
       {
         name: '子菜单1',
-        path: '/home',
+        path: '/keepAliveDemo',
       },
     ],
   },
@@ -44,14 +42,14 @@ const menuList = [
     icon: <PieChartOutlined />,
   },
 ];
-const { Content, Footer, Sider, Header } = Layout;
+const { Content, Sider, Header } = Layout;
 const { SubMenu } = Menu;
 const LayoutPage = (props: any) => {
   const layoutLoading = false;
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
-  const goDtail = (url: string) => {
-    history.push(url);
-  };
+  // const goDtail = (url: string) => {
+  //   history.push(url);
+  // };
 
   return (
     <Spin spinning={layoutLoading}>
@@ -78,7 +76,7 @@ const LayoutPage = (props: any) => {
               ' ' +
               `${leftSiderCollapsed ? 'sider-warp__collapsed' : ''}`
             }
-          ></div>
+          />
           <Sider
             className="sider"
             collapsed={leftSiderCollapsed}
@@ -106,7 +104,7 @@ const LayoutPage = (props: any) => {
                   return (
                     <SubMenu key={index} title={item.name} icon={item.icon}>
                       {item.children &&
-                        item.children.map((KidItem: any, kidIndex: number) => {
+                        item.children.map((KidItem: any) => {
                           return (
                             <Menu.Item key={KidItem.path}>
                               {' '}

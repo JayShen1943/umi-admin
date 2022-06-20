@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-01 10:43:43
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-03 10:21:11
+ * @LastEditTime: 2022-06-20 20:24:38
  */
 module.exports = {
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
@@ -31,5 +31,9 @@ module.exports = {
     'no-unused-vars': 1, // js从未使用的变量
     '@typescript-eslint/no-unused-vars': ['off'], // ts从未使用的变量
     'prettier/prettier': 'off', //关闭prettier
+    '@typescript-eslint/no-shadow': 'off', //关闭ts禁止变量声明与外层作用域的变量同名
+    'react/no-array-index-key': 'off', //关闭react禁止使用数组索引作为key
+    'no-unused-expressions': 'off', //关闭禁止无用的表达式
+    '@typescript-eslint/no-unused-expressions': 'off', //关闭ts禁止无用的表达式
   },
 };

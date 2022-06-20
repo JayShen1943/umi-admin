@@ -3,48 +3,49 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 09:06:31
+ * @LastEditTime: 2022-06-20 19:07:34
  */
 import CommonBox from '@/components/CommonBox';
 import { demoA } from '@/services';
-import { Button } from 'antd';
 import { useEffect, useState } from 'react';
-import { getLocale, setLocale, useDispatch, useIntl, useStore } from 'umi';
-interface List {
-  username: String;
-}
+import { getLocale, setLocale, useDispatch, useIntl, useStore, connect } from 'umi';
+import { ReactComponent as Logo } from '@/assets/svg/dark.svg';
+import { getTheme, setTheme } from "@/utils/theme"
+import "./demo.less"
 const Demo = (props: any) => {
-  const [list, setList] = useState<List[]>([]);
+  // const [list, setList] = useState<List[]>([]);
   const intl = useIntl();
-  const [count, setCount] = useState(0);
   // connect写法
-  // const { dispatch } = props;
-  // const { color } = props.index;
+  const { dispatch } = props;
 
   // hooks写法 获取所有model
   const state = useStore();
-  const dispatch = useDispatch();
+  const dispatchHooks = useDispatch();
   const { color } = state.getState().index;
   const { userInfo } = state.getState().globalModel;
-
+  const [active, setActive] = useState('light');
+  const handleChange = (val: string) => {
+    setActive(val === 'light' ? 'dark' : 'light');
+    setTheme(val);
+  };
   useEffect(() => {
-    demoA({}).then(() => {});
-    let a = 1;
-    let b = 2;
-    if (a == b) {
-      console.log('11');
-    }
+    setTheme(active);
+  }, [active]);
+  useEffect(() => {
+    demoA({}).then(() => { });
   }, []);
+
+
   const clickDemo = () => {
     if (color === 'red') {
-      dispatch({
+      dispatchHooks({
         type: 'index/setCount', //指定哪个 model 层里面的哪个 方法
         payload: { color: '#333' },
         //需要传递到 model 层里面的参数。
       });
       localStorage.setItem('color', '#333');
     } else {
-      dispatch({
+      dispatchHooks({
         type: 'index/setCount',
         payload: { color: 'red' },
       });
@@ -82,19 +83,25 @@ const Demo = (props: any) => {
   };
   return (
     <div>
+      <CommonBox marginGroup="20px 0px">
+        <h1 className='demo-text'>主题变色：</h1>
+        <button onClick={() => handleChange('light')}>换颜色1</button>
+        <button onClick={() => handleChange('dark')}>换颜色2</button>
+        <div>当前颜色：{getTheme()}</div>
+      </CommonBox>
       <CommonBox height="80px">
+        <Logo width={20} height={20} />
         <h1>dva数据管理:</h1>
         <button onClick={() => clickDemo()}>换颜色</button>当前颜色：{color}
-        <div className="box">11</div>
       </CommonBox>
-      <CommonBox marginGroup="30px 0px">
+      <CommonBox marginGroup="20px 0px">
         <h1>dva数据管理（hooks）:</h1>
         <button onClick={() => globalClick()}>个人信息修改</button>
         <div>name：{userInfo.name}</div>
         <div>age：{userInfo.age}</div>
         <div>phone：{userInfo.phone}</div>
       </CommonBox>
-      <CommonBox marginGroup="30px 0px" height="80px">
+      <CommonBox marginGroup="20px 0px" height="80px">
         <h1>国际化:</h1>
         <button onClick={() => clickLang()}>换语言</button>
         {intl.formatMessage(
@@ -103,15 +110,6 @@ const Demo = (props: any) => {
             name: '变量：',
           },
         )}
-      </CommonBox>
-      <CommonBox height="100px">
-        <h1>keepAlive缓存:</h1>
-        <p>count: {count}</p>
-        <button onClick={() => setCount((count) => count + 1)}>Add</button>
-        <Button type="primary" size="middle">
-          {' '}
-          确定
-        </Button>
       </CommonBox>
     </div>
   );
@@ -125,19 +123,20 @@ const Warp = (props: any) => {
   );
 };
 
-// 搭配hooks写法
-export default Warp;
-
 // 写法一 ：
-// export default connect((index) => index)(Warp);
+export default connect((index) => index)(Warp);
 
 // 写法二
-// export default connect(({ index }) => ({
+// export default connect(({ index, globalModel }: any) => ({
 //   index,
+//   globalModel,
 // }))(Warp);
 
 // 写法三
 // function mapStateToProps(state: any) {
-//   return { todos: state.color };
+//   return {
+//     color: state.index.color,
+//     userInfo: state.globalModel.userInfo
+//   };
 // }
 // export default connect(mapStateToProps)(Warp);

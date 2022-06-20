@@ -3,8 +3,9 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-08 17:03:37
+ * @LastEditTime: 2022-06-20 11:49:38
  */
+import React from 'react';
 import './index.less';
 interface Props {
   height?: string; // 高度
@@ -14,7 +15,7 @@ interface Props {
   popperClass?: string; // 自定义类名
   children?: any;
 }
-const CommonBox = (props: Props) => {
+const CommonBox: React.FC<Props> = (props) => {
   const {
     height,
     minHeight,

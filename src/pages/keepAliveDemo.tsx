@@ -3,14 +3,13 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-09 11:35:48
+ * @LastEditTime: 2022-06-20 11:13:18
  */
-import { history, KeepAlive, useActivate, useUnactivate } from 'umi';
-import { useEffect, useState, createContext } from 'react';
+import { KeepAlive, } from 'umi';
+import { useState, createContext } from 'react';
 import { Button } from 'antd';
-import CommonBox from '@/components/CommonBox';
-const { Provider, Consumer } = createContext();
-const Home = (props: any) => {
+const { Provider, Consumer } = createContext({} as any);
+const Home = () => {
   const [show, setShow] = useState(true);
   const toggle = () => setShow((show) => !show);
   return (

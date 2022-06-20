@@ -1,13 +1,20 @@
 /*
- * @Descripttion:
+ * @Descripttion: TS全局声明
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-10 10:58:42
+ * @LastEditTime: 2022-06-20 15:30:59
  */
 declare module '*.css';
 declare module '*.less';
+declare module '*.scss';
+declare module '*.sass';
 declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.gif';
+declare module '*.bmp';
+declare module '*.tiff';
 declare module '*.svg' {
   export function ReactComponent(
     props: React.SVGProps<SVGSVGElement>,
@@ -21,3 +28,5 @@ declare const CURRENT_ENV: 'dev' | 'test' | 'pord';
 declare const BASE_URL: string;
 // less-> js
 declare module 'less-vars-to-js';
+
+// declare function createContext(defaultValue?: () => void): any
