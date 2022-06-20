@@ -4,7 +4,7 @@
     "start": "cross-env UMI_ENV=dev umi dev",
     "build:test": "cross-env UMI_ENV=test umi build",
     "build": "cross-env UMI_ENV=prod umi build",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "postinstall": "umi generate tmp",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
