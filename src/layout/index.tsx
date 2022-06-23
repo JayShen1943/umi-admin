@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 14:18:45
+ * @LastEditTime: 2022-06-23 17:50:44
  */
 import { useState } from 'react';
 import { Layout, Menu, Spin, Button } from 'antd';
@@ -16,8 +16,8 @@ import {
 import './index.less';
 import { Link, connect } from 'umi';
 import { autoFixContext } from 'react-activation';
-import LogoText from '@/assets/iconImage/logoText.png';
-import LogoOnly from '@/assets/iconImage/logoOnly.png';
+import LogoText from '@/assets/image/logoText.png';
+import LogoOnly from '@/assets/image/logoOnly.png';
 // 自动修复特定版本Context数据共享问题 (勿删！！！)
 autoFixContext(
   [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],

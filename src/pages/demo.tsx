@@ -3,16 +3,17 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 09:40:35
+ * @LastEditTime: 2022-06-23 17:57:02
  */
-import CommonBox from '@/components/CommonBox';
+import CommonBox from '@/common/CommonBox';
 import { getArticleList } from '@/services';
 import { useEffect, useState } from 'react';
 import { getLocale, setLocale, useDispatch, useIntl, useStore, connect } from 'umi';
-import { ReactComponent as Logo } from '@/assets/svg/dark.svg';
+// import { ReactComponent as Logo } from '@/assets/svg/dark.svg';
 import { getTheme, setTheme } from "@/utils/theme"
 import "./demo.less"
 import { debounce, formatImg } from '@/utils/tools';
+import SvgIcon from '@/common/SvgIcon';
 const Demo = (props: any) => {
   // const [list, setList] = useState<List[]>([]);
   const intl = useIntl();
@@ -90,6 +91,10 @@ const Demo = (props: any) => {
   };
   return (
     <div>
+      <CommonBox marginGroup='20px 0px'>
+        svg使用方式:
+        <SvgIcon name='light' />
+      </CommonBox>
       <CommonBox marginGroup="20px 0px">
         <img src={formatImg('')} alt="" />
         <button onClick={() => getData()}>调取接口</button>
@@ -101,7 +106,7 @@ const Demo = (props: any) => {
         <div>当前颜色：{getTheme()}</div>
       </CommonBox>
       <CommonBox height="80px">
-        <Logo width={20} height={20} />
+        {/* <Logo width={20} height={20} /> */}
         <h1>dva数据管理:</h1>
         <button onClick={() => clickDemo()}>换颜色</button>当前颜色：{color}
       </CommonBox>
