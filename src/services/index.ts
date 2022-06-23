@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 10:29:16
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-02 15:05:18
+ * @LastEditTime: 2022-06-23 09:40:12
  */
 import request from '@/utils/request';
 const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
@@ -29,3 +29,13 @@ export const demoA = (params: any) => {
     // requestType: 'form'
   });
 };
+
+// 获取文章列表
+export const getArticleList = <T>(params: T): Promise<T> => {
+  return request(`${apis}/article/pageList`, {
+    method: 'get',
+    data: params,
+    openPreventRequest: true
+  });
+};
+

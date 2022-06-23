@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 20:03:58
+ * @LastEditTime: 2022-06-23 14:18:45
  */
 import { useState } from 'react';
 import { Layout, Menu, Spin, Button } from 'antd';
@@ -50,7 +50,6 @@ const LayoutPage = (props: any) => {
   // const goDtail = (url: string) => {
   //   history.push(url);
   // };
-
   return (
     <Spin spinning={layoutLoading}>
       <Layout className="layout-warp">

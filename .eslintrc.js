@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-01 10:43:43
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 20:24:38
+ * @LastEditTime: 2022-06-23 09:43:10
  */
 module.exports = {
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
@@ -30,10 +30,11 @@ module.exports = {
     'react-hooks/exhaustive-deps': 2, // 检查 effect 的依赖
     'no-unused-vars': 1, // js从未使用的变量
     '@typescript-eslint/no-unused-vars': ['off'], // ts从未使用的变量
-    'prettier/prettier': 'off', //关闭prettier
-    '@typescript-eslint/no-shadow': 'off', //关闭ts禁止变量声明与外层作用域的变量同名
-    'react/no-array-index-key': 'off', //关闭react禁止使用数组索引作为key
-    'no-unused-expressions': 'off', //关闭禁止无用的表达式
-    '@typescript-eslint/no-unused-expressions': 'off', //关闭ts禁止无用的表达式
+    'prettier/prettier': 'off', // 关闭prettier
+    '@typescript-eslint/no-shadow': 'off', // 关闭ts禁止变量声明与外层作用域的变量同名
+    'react/no-array-index-key': 'off', //关 闭react禁止使用数组索引作为key
+    'no-unused-expressions': 'off', // 关闭禁止无用的表达式
+    '@typescript-eslint/no-unused-expressions': 'off', // 关闭ts禁止无用的表达式
+    '@typescript-eslint/no-invalid-this': 'off',// 在类或类似类的对象之外禁止this
   },
 };

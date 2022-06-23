@@ -3,20 +3,28 @@
  * @Author: JayShen
  * @Date: 2021-11-01 13:57:56
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-02 13:55:22
+ * @LastEditTime: 2022-06-21 17:02:25
  */
 import { defineConfig } from 'umi';
-const baseUrl = 'http://localhost:3000';
+let baseUrl = '';
+baseUrl = "https://www.jayshen1943.com"
 export default defineConfig({
   define: {
     CURRENT_ENV: 'dev',
     BASE_URL: baseUrl,
   },
   proxy: {
+    // '/apis': {
+    //   target: baseUrl,
+    //   pathRewrite: { '^/apis': '' },
+    //   changeOrigin: true,
+    // },
+    // 连接生产环境
     '/apis': {
       target: baseUrl,
-      pathRewrite: { '^/apis': '' },
+      pathRewrite: { '^/admin/apis': '' },
       changeOrigin: true,
+      secure: false, // https协议跳过验证
     },
   },
 });

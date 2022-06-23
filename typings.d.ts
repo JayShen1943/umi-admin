@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 15:30:59
+ * @LastEditTime: 2022-06-22 16:30:34
  */
 declare module '*.css';
 declare module '*.less';

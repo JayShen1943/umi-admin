@@ -3,15 +3,16 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 20:52:15
+ * @LastEditTime: 2022-06-23 09:40:35
  */
 import CommonBox from '@/components/CommonBox';
-import { demoA } from '@/services';
+import { getArticleList } from '@/services';
 import { useEffect, useState } from 'react';
 import { getLocale, setLocale, useDispatch, useIntl, useStore, connect } from 'umi';
 import { ReactComponent as Logo } from '@/assets/svg/dark.svg';
 import { getTheme, setTheme } from "@/utils/theme"
 import "./demo.less"
+import { debounce, formatImg } from '@/utils/tools';
 const Demo = (props: any) => {
   // const [list, setList] = useState<List[]>([]);
   const intl = useIntl();
@@ -32,9 +33,15 @@ const Demo = (props: any) => {
     setTheme(active);
   }, [active]);
   useEffect(() => {
-    demoA({}).then(() => { });
+    // getData()
   }, []);
 
+  const getData = debounce(() => {
+    getArticleList({
+      demo: 1,
+      total: 'ss'
+    }).then(() => { });
+  }, 200)
 
   const clickDemo = () => {
     if (color === 'red') {
@@ -83,6 +90,10 @@ const Demo = (props: any) => {
   };
   return (
     <div>
+      <CommonBox marginGroup="20px 0px">
+        <img src={formatImg('')} alt="" />
+        <button onClick={() => getData()}>调取接口</button>
+      </CommonBox>
       <CommonBox marginGroup="20px 0px">
         <h1 className='demo-text'>主题变色：</h1>
         <button onClick={() => handleChange('light')}>换颜色1</button>

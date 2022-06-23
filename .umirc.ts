@@ -3,13 +3,16 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 19:58:36
+ * @LastEditTime: 2022-06-21 16:08:34
  */
 import { defineConfig } from 'umi';
 import Routes from './src/routers';
 import theme from './src/styles/theme/variables';
 import path from 'path';
 export default defineConfig({
+  devServer: {
+    port: 6008
+  },
   // 别名配置
   // alias: {
   //   "@": resolve(__dirname, "./src"),
