@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 10:29:16
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 09:40:12
+ * @LastEditTime: 2022-06-23 18:09:15
  */
 import request from '@/utils/request';
 const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
@@ -38,4 +38,15 @@ export const getArticleList = <T>(params: T): Promise<T> => {
     openPreventRequest: true
   });
 };
+
+export const test = <T>(params: T): Promise<T> => {
+  return request(`${apis}/api/test/test`, {
+    method: 'get',
+    data: params,
+    appendHeaders: {
+      token: 'fuck'
+    }
+  });
+};
+
 

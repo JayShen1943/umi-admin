@@ -3,10 +3,11 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 17:50:44
+ * @LastEditTime: 2022-06-24 18:06:12
  */
 import { useState } from 'react';
 import { Layout, Menu, Spin, Button } from 'antd';
+import type { MenuProps } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -14,7 +15,7 @@ import {
   MenuFoldOutlined,
 } from '@ant-design/icons';
 import './index.less';
-import { Link, connect } from 'umi';
+import { connect, history } from 'umi';
 import { autoFixContext } from 'react-activation';
 import LogoText from '@/assets/image/logoText.png';
 import LogoOnly from '@/assets/image/logoOnly.png';
@@ -26,30 +27,49 @@ autoFixContext(
 
 const menuList = [
   {
-    name: '菜单1',
+    label: '菜单1',
     path: '/',
+    key: '/',
     icon: <DesktopOutlined />,
     children: [
       {
-        name: '子菜单1',
+        label: '子菜单1',
         path: '/keepAliveDemo',
+        key: '/keepAliveDemo',
       },
     ],
   },
   {
-    name: '菜单2',
+    label: '菜单2',
     path: '/demo',
+    key: '/demo',
     icon: <PieChartOutlined />,
   },
 ];
+const navList = [
+  {
+    label: 'nav1',
+    path: '/demo',
+    key: '/nav1',
+  },
+  {
+    label: 'nav2',
+    path: '/demo',
+    key: '/nav2',
+  },
+]
 const { Content, Sider, Header } = Layout;
-const { SubMenu } = Menu;
 const LayoutPage = (props: any) => {
   const layoutLoading = false;
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
   // const goDtail = (url: string) => {
   //   history.push(url);
   // };
+
+  // 菜单点击 
+  const menuClick: MenuProps['onClick'] = e => {
+    history.push(e.key);
+  };
   return (
     <Spin spinning={layoutLoading}>
       <Layout className="layout-warp">
@@ -63,10 +83,8 @@ const LayoutPage = (props: any) => {
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['2']}
-          >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-          </Menu>
+            items={navList}
+          />
         </Header>
         <Layout>
           <div
@@ -93,12 +111,15 @@ const LayoutPage = (props: any) => {
             )}
 
             <Menu
+              onClick={menuClick}
               theme="light"
               defaultSelectedKeys={['1']}
               mode="inline"
               className="left-menu"
+              items={menuList}
             >
-              {menuList.map((item: any, index) => {
+              {/* 此写法新版本报警告 */}
+              {/* {menuList.map((item: any, index) => {
                 if (item.children) {
                   return (
                     <SubMenu key={index} title={item.name} icon={item.icon}>
@@ -120,7 +141,7 @@ const LayoutPage = (props: any) => {
                     </Menu.Item>
                   );
                 }
-              })}
+              })} */}
             </Menu>
             <div
               className="button-wapr"

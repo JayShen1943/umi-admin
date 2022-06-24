@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 11:13:18
+ * @LastEditTime: 2022-06-24 09:44:51
  */
 import { KeepAlive, } from 'umi';
 import { useState, createContext } from 'react';
@@ -16,14 +16,18 @@ const Home = () => {
     <>
       <div>
         <Provider value={'接受到参数'}>
-          {show && (
+          {/* mfsu下会报错 */}
+          {/* {show && (
             <KeepAlive name="Test">
               <Consumer>
                 {(context) => <Test contextValue={context} />}
               </Consumer>
-              {/* <Test /> */}
             </KeepAlive>
-          )}
+          )} */}
+          {show}
+          <Consumer>
+            {(context) => <Test contextValue={context} />}
+          </Consumer>
           <button onClick={toggle}>显示/隐藏</button>
         </Provider>
       </div>
@@ -43,7 +47,7 @@ function Test({ contextValue = null }) {
   );
 }
 export default () => (
-  // <KeepAlive>
-  <Home />
-  // </KeepAlive>
+  <KeepAlive>
+    <Home />
+  </KeepAlive>
 );

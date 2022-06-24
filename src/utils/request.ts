@@ -3,12 +3,13 @@
  * @Author: JayShen
  * @Date: 2021-11-02 09:03:16
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 14:16:44
+ * @LastEditTime: 2022-06-24 16:55:45
  */
 
 import { extend } from 'umi-request';
 import type { RequestOptionsInit } from 'umi-request';
 import errorHandler from "@/utils/errorHandler"
+import formatSign from "@/utils/formatSign"
 // import { notification } from 'antd';
 import {
   checkRepeatRequest,
@@ -30,20 +31,9 @@ const request = extend({
 });
 // request拦截器, 携带token,以及根据环境,配置不同的请求前缀
 request.interceptors.request.use((url: string, options: RequestOptionsInit): any => {
+  const { appendHeaders = {} } = options || {};
   //获取存储在本地的token
   const token: string = localStorage.getItem('token') || '';
-  const { appendHeaders = {} } = options || {};
-  const dateTime = new Date().getTime()
-  const headers = {
-    token: token,
-    lang: 'zh',
-    ...appendHeaders,
-    "timestamp": dateTime, // 时间戳
-  };
-  // 重复请求拦截开关 默认flase
-  options.openPreventRequest = options.openPreventRequest || false
-  // 参数类型 json 和 form，默认json
-  options.requestType = options.requestType ? options.requestType : 'json';
   // umi中 get和delete请求参数是 params，post是data，为了方便统一使用data
   if (
     options.method?.toUpperCase() === 'GET' ||
@@ -51,6 +41,22 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit): any
   ) {
     options.params = options.data;
   }
+  const dateTime = new Date().getTime()
+  const sign: string = formatSign.disposeSign(options.data, dateTime)
+  const headers = {
+    token: token,
+    lang: 'zh',
+    ...appendHeaders,
+    timestamp: dateTime, // 时间戳
+    sign: sign, // 验签
+    equipmentType: 'PC', // 设备类型
+    version: '1.0', // 版本号 
+  };
+  // 重复请求拦截开关 默认flase
+  options.openPreventRequest = options.openPreventRequest || false
+  // 参数类型 json 和 form，默认json
+  options.requestType = options.requestType ? options.requestType : 'json';
+
   if (token) {
     return {
       url,

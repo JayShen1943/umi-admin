@@ -3,10 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 17:57:02
+ * @LastEditTime: 2022-06-24 18:05:52
  */
 import CommonBox from '@/common/CommonBox';
-import { getArticleList } from '@/services';
+import { test } from '@/services';
 import { useEffect, useState } from 'react';
 import { getLocale, setLocale, useDispatch, useIntl, useStore, connect } from 'umi';
 // import { ReactComponent as Logo } from '@/assets/svg/dark.svg';
@@ -14,6 +14,7 @@ import { getTheme, setTheme } from "@/utils/theme"
 import "./demo.less"
 import { debounce, formatImg } from '@/utils/tools';
 import SvgIcon from '@/common/SvgIcon';
+import ZoomImg from '@/common/ZoomImg';
 const Demo = (props: any) => {
   // const [list, setList] = useState<List[]>([]);
   const intl = useIntl();
@@ -38,11 +39,11 @@ const Demo = (props: any) => {
   }, []);
 
   const getData = debounce(() => {
-    getArticleList({
+    test({
       demo: 1,
       total: 'ss'
     }).then(() => { });
-  }, 200)
+  }, 0)
 
   const clickDemo = () => {
     if (color === 'red') {
@@ -89,8 +90,17 @@ const Demo = (props: any) => {
       });
     }
   };
+  const srcList = ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp']
   return (
     <div>
+      <CommonBox marginGroup='20px 0px'>
+        ZoomImg:
+        <ZoomImg src={srcList[0]} marginGroup='0px 10px' isText={true}>
+          点击看图
+        </ZoomImg>
+        {/* <ZoomImg src={srcList[0]} marginGroup='0px 10px' />
+        <ZoomImg src={srcList[1]} srcList={srcList} /> */}
+      </CommonBox>
       <CommonBox marginGroup='20px 0px'>
         svg使用方式:
         <SvgIcon name='light' />

@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-20 08:47:00
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 10:32:34
+ * @LastEditTime: 2022-06-24 13:26:21
 -->
 
 ## project
@@ -43,7 +43,7 @@ yarn lint
     ├── layouts                     // 全局布局
     ├── locales                     // 国际化配置
     ├── assets                      // 静态资源
-    ├── components                  // 公共组件
+    ├── common                      // 公共组件
     ├── models                      // 全局 models
     ├── services                    // API接口
     ├── styles                      // 样式文件

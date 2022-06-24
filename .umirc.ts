@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 17:51:44
+ * @LastEditTime: 2022-06-24 14:46:41
  */
 import { defineConfig } from 'umi';
 import Routes from './src/routers';
@@ -33,6 +33,7 @@ export default defineConfig({
     immer: true, // 方便修改 reducer
     hmr: true, // 热更新,
   },
+  mfsu: {},
   theme: theme,
   metas: [
     {
