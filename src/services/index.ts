@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 10:29:16
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 18:09:15
+ * @LastEditTime: 2022-06-28 12:08:12
  */
 import request from '@/utils/request';
 const apis = CURRENT_ENV === 'dev' ? '/apis' : '';

@@ -3,11 +3,15 @@
  * @Author: JayShen
  * @Date: 2022-06-21 16:12:27
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 14:13:33
+ * @LastEditTime: 2022-06-28 12:09:25
  */
 import qs from "qs"
 import md5 from 'md5'
-
+interface IOptions {
+    openPreventRequest?: boolean;
+    url?: string;
+    data?: any
+}
 /**
  * 缓存请求的接口信息list
  */
@@ -16,7 +20,7 @@ const requestMap: string[] = []
  * 获取请求信息
  * @param {Object} options
  */
-const getRequestInfo = (options: any): string => {
+const getRequestInfo = (options: IOptions): string => {
     const { url, data } = options
     const obj = {
         data,
@@ -30,7 +34,7 @@ const getRequestInfo = (options: any): string => {
  * 检查是不是重复请求
  * @param {Object} options
  */
-const checkRepeatRequest = (options: any): boolean => {
+const checkRepeatRequest = (options: IOptions): boolean => {
     const requestInfo = getRequestInfo(options)
     return requestMap.includes(requestInfo)
 }
@@ -39,7 +43,7 @@ const checkRepeatRequest = (options: any): boolean => {
  * 添加请求
  * @param {Object} options
  */
-const addRequest = (options: any): void => {
+const addRequest = (options: IOptions): void => {
     if (!options.openPreventRequest) return
     const requestInfo = getRequestInfo(options)
     requestMap.push(requestInfo)
@@ -49,7 +53,7 @@ const addRequest = (options: any): void => {
  * 移除请求
  * @param {Object} options
  */
-const removeRequest = (options: any): void => {
+const removeRequest = (options: IOptions): void => {
     if (!options.openPreventRequest) return
     const requestInfo = getRequestInfo(options)
     const requestIndex = requestMap.indexOf(requestInfo)

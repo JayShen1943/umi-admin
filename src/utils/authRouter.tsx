@@ -3,11 +3,14 @@
  * @Author: JayShen
  * @Date: 2022-06-22 17:58:44
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 14:15:26
+ * @LastEditTime: 2022-06-28 11:17:18
  */
 // import { useLocation } from 'umi';
 import { clearRequestMap } from "@/utils/preventRequest"
-export default (props: any) => {
+interface Iprops {
+    children: any
+}
+export default (props: Iprops) => {
     // const location = useLocation()
     // 切换路由时清空接口list
     clearRequestMap()

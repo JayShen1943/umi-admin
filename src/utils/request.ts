@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 09:03:16
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-24 16:55:45
+ * @LastEditTime: 2022-06-28 12:11:27
  */
 
 import { extend } from 'umi-request';
@@ -52,11 +52,10 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit): any
     equipmentType: 'PC', // 设备类型
     version: '1.0', // 版本号 
   };
-  // 重复请求拦截开关 默认flase
-  options.openPreventRequest = options.openPreventRequest || false
+  // 重复请求拦截开关 以openPreventRequest参数为准，post请求下默认为true  可手动false关闭
+  options.openPreventRequest = (options.openPreventRequest || (options.openPreventRequest === undefined && options.method?.toUpperCase() === 'POST')) ? true : false
   // 参数类型 json 和 form，默认json
   options.requestType = options.requestType ? options.requestType : 'json';
-
   if (token) {
     return {
       url,
@@ -79,6 +78,7 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit): any
     options: { ...options },
   };
 });
+
 request.interceptors.response.use(async (response, options: RequestOptionsInit) => {
   const data = await response.clone().json();
   // token失效 退出来

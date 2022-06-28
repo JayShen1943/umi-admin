@@ -3,11 +3,11 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-24 14:46:41
+ * @LastEditTime: 2022-06-28 17:17:00
  */
 import { defineConfig } from 'umi';
 import Routes from './src/routers';
-import theme from './src/styles/theme/variables';
+import theme from './src/styles/variables';
 import path from 'path';
 export default defineConfig({
   devServer: {
@@ -28,7 +28,8 @@ export default defineConfig({
     antd: true, // ant国际化
     title: true, // 页面标题国际化
   },
-  antd: {},
+  antd: {
+  },
   dva: {
     immer: true, // 方便修改 reducer
     hmr: true, // 热更新,

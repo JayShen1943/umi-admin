@@ -3,10 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 11:49:38
+ * @LastEditTime: 2022-06-28 15:09:10
  */
 import React from 'react';
-import './index.less';
+import style from './index.module.less';
 interface Props {
   height?: string; // 高度
   minHeight?: string; // 最小高度（支持calc模式）
@@ -27,7 +27,7 @@ const CommonBox: React.FC<Props> = (props) => {
     <>
       {props.children && (
         <div
-          className={'common-box' + ' ' + `${popperClass}`}
+          className={style['common-box'] + ' ' + `${popperClass}`}
           style={{
             height: height,
             minHeight: minHeight,

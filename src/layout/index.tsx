@@ -3,9 +3,9 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-24 18:06:12
+ * @LastEditTime: 2022-06-28 17:37:44
  */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu, Spin, Button } from 'antd';
 import type { MenuProps } from 'antd';
 import {
@@ -19,6 +19,7 @@ import { connect, history } from 'umi';
 import { autoFixContext } from 'react-activation';
 import LogoText from '@/assets/image/logoText.png';
 import LogoOnly from '@/assets/image/logoOnly.png';
+import globalConfig from "./globalConfig"
 // 自动修复特定版本Context数据共享问题 (勿删！！！)
 autoFixContext(
   [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
@@ -59,13 +60,13 @@ const navList = [
   },
 ]
 const { Content, Sider, Header } = Layout;
-const LayoutPage = (props: any) => {
+interface Iprops {
+  children: any
+}
+const LayoutPage: React.FC<Iprops> = (props) => {
+  globalConfig()
   const layoutLoading = false;
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
-  // const goDtail = (url: string) => {
-  //   history.push(url);
-  // };
-
   // 菜单点击 
   const menuClick: MenuProps['onClick'] = e => {
     history.push(e.key);

@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-22 16:30:34
+ * @LastEditTime: 2022-06-28 14:23:04
  */
 declare module '*.css';
 declare module '*.less';
@@ -28,5 +28,10 @@ declare const CURRENT_ENV: 'dev' | 'test' | 'pord';
 declare const BASE_URL: string;
 // less-> js
 declare module 'less-vars-to-js';
+
+declare module '*.module.less' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
+}
 
 // declare function createContext(defaultValue?: () => void): any

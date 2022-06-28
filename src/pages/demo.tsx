@@ -3,15 +3,15 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-24 18:05:52
+ * @LastEditTime: 2022-06-28 17:37:49
  */
 import CommonBox from '@/common/CommonBox';
-import { test } from '@/services';
+import { getArticleList } from '@/services';
 import { useEffect, useState } from 'react';
 import { getLocale, setLocale, useDispatch, useIntl, useStore, connect } from 'umi';
 // import { ReactComponent as Logo } from '@/assets/svg/dark.svg';
 import { getTheme, setTheme } from "@/utils/theme"
-import "./demo.less"
+import style from "./demo.module.less"
 import { debounce, formatImg } from '@/utils/tools';
 import SvgIcon from '@/common/SvgIcon';
 import ZoomImg from '@/common/ZoomImg';
@@ -39,7 +39,7 @@ const Demo = (props: any) => {
   }, []);
 
   const getData = debounce(() => {
-    test({
+    getArticleList({
       demo: 1,
       total: 'ss'
     }).then(() => { });
@@ -93,13 +93,19 @@ const Demo = (props: any) => {
   const srcList = ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp']
   return (
     <div>
+      <div className={style.demo}>
+        父文字
+        <div className={style.kid}>
+          子文字
+        </div>
+      </div>
       <CommonBox marginGroup='20px 0px'>
-        ZoomImg:
-        <ZoomImg src={srcList[0]} marginGroup='0px 10px' isText={true}>
-          点击看图
+        ZoomImg组件使用:
+        <ZoomImg src={srcList[0]} marginGroup='0px 10px' isText={true} >
+          点击看图1
         </ZoomImg>
-        {/* <ZoomImg src={srcList[0]} marginGroup='0px 10px' />
-        <ZoomImg src={srcList[1]} srcList={srcList} /> */}
+        <ZoomImg src={''} marginGroup='0px 10px' width={60} />
+        <ZoomImg src={srcList[1]} srcList={srcList} width={60} />
       </CommonBox>
       <CommonBox marginGroup='20px 0px'>
         svg使用方式:
@@ -116,7 +122,6 @@ const Demo = (props: any) => {
         <div>当前颜色：{getTheme()}</div>
       </CommonBox>
       <CommonBox height="80px">
-        {/* <Logo width={20} height={20} /> */}
         <h1>dva数据管理:</h1>
         <button onClick={() => clickDemo()}>换颜色</button>当前颜色：{color}
       </CommonBox>

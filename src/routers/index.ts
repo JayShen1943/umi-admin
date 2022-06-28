@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 16:08:09
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 14:16:23
+ * @LastEditTime: 2022-06-28 11:15:19
  */
 // import Home from '../pages/home'
 // import authRoute from "@/utils/authRoute";
@@ -17,7 +17,7 @@ const routes = [
     title: '首页',
     path: '/',
     component: '@/layout/index',
-    wrappers: ['@/routers/authRouter'],
+    wrappers: ['@/utils/authRouter'],
     // 所有路由都写到routes里面
     routes: [
       {
