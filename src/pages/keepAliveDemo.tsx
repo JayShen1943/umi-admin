@@ -3,12 +3,11 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 14:37:53
+ * @LastEditTime: 2022-06-28 17:46:52
  */
 import { KeepAlive, } from 'umi';
 import { useState, createContext } from 'react';
 import { Button } from 'antd';
-import style from "./keepAliveDemo.less"
 const { Provider, Consumer } = createContext({} as any);
 const Home = () => {
   const [show, setShow] = useState(true);
@@ -39,7 +38,6 @@ function Test({ contextValue = null }) {
   const [count1, setCount1] = useState(0);
   return (
     <div>
-      <div className={style.demo}>测试2 </div>
       <p>count: {count1}</p>
       <Button onClick={() => setCount1((count) => count + 1)} type="primary">
         Add

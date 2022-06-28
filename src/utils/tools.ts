@@ -3,8 +3,9 @@
  * @Author: JayShen
  * @Date: 2022-06-22 16:13:35
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 14:17:41
+ * @LastEditTime: 2022-06-28 17:45:34
  */
+import JSEncrypt from 'jsencrypt';
 import defaultImg from '@/assets/image/defaultImg.png'
 /**
  * @Description: 函数防抖 (只执行最后一次点击)
@@ -83,7 +84,7 @@ export const formatImg = (path: string): string => {
     }
 }
 /**
- * @Description:  缺省数据显示 '-'
+ * @Description: 缺省数据显示 '-'
  * @Author: JayShen
  * @param {*}
  */
@@ -91,3 +92,15 @@ export const tranNull = (value: any) => {
     if (value === null || value === undefined || value === '' || value === 'null') return '--'
     return value
 }
+/**
+ * @Description: rsa公钥加密
+ * @Author: JayShen
+ * @param {*}
+ */
+export const rsaEncrypt = (data: string): string | boolean => {
+    const publicKey = `MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZIJQ6ILH1Po3o7l38udVVyrjb/caY5RaRtkeBQZT7vEDClOnYjBHLOINONPg8lGDbZtSp9k8UiiWIkufTd6W3b8jXwnQs16OPwLYxJHQXLCpDTx1riPqcpVM8he3NcAPyK//NCwQ+Ha/1EU6Wxv9QbZI25mEcEU8LJh641aMyBQIDAQAB`;
+    const encrypt = new JSEncrypt();
+    encrypt.setPublicKey(publicKey);
+    const encrypted = encrypt.encrypt(data);
+    return encrypted;
+};

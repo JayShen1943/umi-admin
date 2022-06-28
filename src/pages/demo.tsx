@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 17:37:49
+ * @LastEditTime: 2022-06-28 17:47:56
  */
 import CommonBox from '@/common/CommonBox';
 import { getArticleList } from '@/services';
@@ -93,16 +93,12 @@ const Demo = (props: any) => {
   const srcList = ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp']
   return (
     <div>
-      <div className={style.demo}>
-        父文字
-        <div className={style.kid}>
-          子文字
-        </div>
-      </div>
       <CommonBox marginGroup='20px 0px'>
         ZoomImg组件使用:
         <ZoomImg src={srcList[0]} marginGroup='0px 10px' isText={true} >
-          点击看图1
+          <span className={style.view}>
+            点击看图1
+          </span>
         </ZoomImg>
         <ZoomImg src={''} marginGroup='0px 10px' width={60} />
         <ZoomImg src={srcList[1]} srcList={srcList} width={60} />
