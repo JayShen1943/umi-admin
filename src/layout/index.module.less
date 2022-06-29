@@ -1,40 +1,4 @@
 .layout-warp {
-  .header {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1;
-    width: ~'calc(100% - 230px)';
-    height: 46px;
-    padding: 0px;
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 0px 2px 8px 0px rgba(64, 134, 255, 0.36);
-    transition: all 0.2s;
-
-    .header-menu {
-      background: #fff;
-      border-radius: 6px;
-
-      .ant-menu-item {
-        color: #333;
-      }
-
-      .ant-menu-item-selected,
-      .ant-menu-item-active {
-        color: #fff;
-      }
-    }
-
-    &__collapsed {
-      width: ~'calc(100% - 80px)';
-    }
-
-    .header-menu {
-      height: 46px !important;
-      line-height: 46px;
-    }
-  }
 
   .sider-warp {
     flex: 0 0 200px;
@@ -52,12 +16,12 @@
     position: fixed;
     top: 10px;
     left: 10px;
-    height: 100%;
+    height: calc(100% - 20px);
     color: #fff;
     background: #fff;
     border-radius: 6px;
-    box-shadow: 0px 2px 8px 0px rgba(210, 210, 210, 0.5),
-      0px 2px 8px 0px rgba(64, 134, 255, 0.36);
+    box-shadow: 0px 2px 8px 0px rgba(210, 210, 210, 0.3),
+      0px 2px 8px 0px rgba(64, 134, 255, 0.26);
 
     .ant-menu-sub {
       background: #fff;
@@ -132,13 +96,13 @@
   }
 
   .layout-right {
-    margin-top: 46px;
     overflow: auto;
-    background: #e2edff;
     transition: all 0.2s;
-
     /* Firefox */
     scrollbar-width: none;
+    box-sizing: border-box;
+    width: 100%;
+    background: #e2edff;
 
     /* Chrome Safari */
     &::-webkit-scrollbar {
@@ -147,9 +111,12 @@
 
     // 内容部分和菜单的滚动条分离
     .content {
-      width: 100%;
-      height: 100%;
-      padding: 10px 0px 10px 10px;
+      min-height: calc(100vh - 76px);
+      margin: 56px 0px 10px 10px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0px 2px 8px 0px rgb(64 134 255 / 36%);
     }
   }
 

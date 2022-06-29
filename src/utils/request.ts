@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 09:03:16
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 12:11:27
+ * @LastEditTime: 2022-06-29 17:29:59
  */
 
 import { extend } from 'umi-request';
@@ -28,39 +28,34 @@ const request = extend({
   timeout: 40000,
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
+  // parseResponse: false,// 关闭简化返回
 });
 // request拦截器, 携带token,以及根据环境,配置不同的请求前缀
 request.interceptors.request.use((url: string, options: RequestOptionsInit): any => {
   const { appendHeaders = {} } = options || {};
   //获取存储在本地的token
   const token: string = localStorage.getItem('token') || '';
+  const sign: string = formatSign.disposeSign(options.data)
+  const headers = {
+    token: token,
+    lang: 'zh',
+    timestamp: new Date().getTime(), // 时间戳
+    sign: sign, // 验签
+    equipmentType: 'PC', // 设备类型
+    version: '1.0', // 版本号 
+    'tenant-id': 0, // 租户id
+    ...appendHeaders,
+  };
+  // 重复请求拦截开关 以openPreventRequest参数为准，post请求下默认为true  可手动false关闭
+  options.openPreventRequest = (options.openPreventRequest || (options.openPreventRequest === undefined && options.method?.toUpperCase() === 'POST')) ? true : false
+  // 参数类型 json 和 form，默认json
+  options.requestType = options.requestType ? options.requestType : 'json';
   // umi中 get和delete请求参数是 params，post是data，为了方便统一使用data
   if (
     options.method?.toUpperCase() === 'GET' ||
     options.method?.toUpperCase() === 'DELETE'
   ) {
     options.params = options.data;
-  }
-  const dateTime = new Date().getTime()
-  const sign: string = formatSign.disposeSign(options.data, dateTime)
-  const headers = {
-    token: token,
-    lang: 'zh',
-    ...appendHeaders,
-    timestamp: dateTime, // 时间戳
-    sign: sign, // 验签
-    equipmentType: 'PC', // 设备类型
-    version: '1.0', // 版本号 
-  };
-  // 重复请求拦截开关 以openPreventRequest参数为准，post请求下默认为true  可手动false关闭
-  options.openPreventRequest = (options.openPreventRequest || (options.openPreventRequest === undefined && options.method?.toUpperCase() === 'POST')) ? true : false
-  // 参数类型 json 和 form，默认json
-  options.requestType = options.requestType ? options.requestType : 'json';
-  if (token) {
-    return {
-      url,
-      options: { ...options, headers: headers },
-    };
   }
   // 检查是否存在重复请求，若存在则取消已发的请求
   if (options.openPreventRequest) {
@@ -75,11 +70,11 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit): any
   }
   return {
     url,
-    options: { ...options },
+    options: { ...options, headers: headers },
   };
 });
 
-request.interceptors.response.use(async (response, options: RequestOptionsInit) => {
+request.interceptors.response.use(async (response: Response, options: RequestOptionsInit) => {
   const data = await response.clone().json();
   // token失效 退出来
   // if (data.code === 'INVALID_TOKEN') {

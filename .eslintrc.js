@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-01 10:43:43
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 09:43:10
+ * @LastEditTime: 2022-06-29 18:40:00
  */
 module.exports = {
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
@@ -36,5 +36,6 @@ module.exports = {
     'no-unused-expressions': 'off', // 关闭禁止无用的表达式
     '@typescript-eslint/no-unused-expressions': 'off', // 关闭ts禁止无用的表达式
     '@typescript-eslint/no-invalid-this': 'off',// 在类或类似类的对象之外禁止this
+    'react-hooks/exhaustive-deps': 'off',// 函数移动到你的 effect 内部
   },
 };

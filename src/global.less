@@ -3,9 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-10-30 11:22:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-20 20:02:25
+ * @LastEditTime: 2022-06-29 15:46:40
  */
 @import './styles/theme.less';
+@import './styles/antd.less';
 
 body,
 dl,
@@ -32,6 +33,7 @@ td {
   font-weight: 400;
   font-family: Helvetica, Arial, sans-serif;
   text-align: left;
+  color: #333;
 }
 
 html,
@@ -89,18 +91,3 @@ ul {
   visibility: hidden;
   content: '';
 }
-
-/**
- * 全局antd 按钮
- */
-.ant-btn {
-  border-radius: 6px !important;
-
-  // &-primary:focus {
-  //   color: #fff;
-  //   border-color: @primary-color;
-  //   background: @primary-color;
-  // }
-}
-
-@font-mini: 12px;

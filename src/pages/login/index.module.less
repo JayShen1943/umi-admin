@@ -1,0 +1,115 @@
+.login {
+  height: 100%;
+  background: #2ac0be;
+  // background: url('../../images/login/bg.jpg');
+  background-size: cover;
+
+  .login-warp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    width: 400px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+
+    .fade-enter {
+      opacity: 0;
+    }
+
+    .fade-exit {
+      opacity: 1;
+    }
+
+    .fade-enter-active {
+      opacity: 1;
+    }
+
+    .fade-exit-active {
+      opacity: 0;
+    }
+
+    .fade-enter-active,
+    .fade-exit-active {
+      transition: opacity 300ms;
+    }
+
+    h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
+
+    .input-warp {
+      position: relative;
+
+      input {
+        width: 100%;
+        margin-bottom: 30px;
+        padding: 10px 0;
+        color: #fff;
+        font-size: 16px;
+        letter-spacing: 1px;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        // -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+      }
+
+      input:focus {
+        outline: none;
+      }
+
+      label {
+        position: absolute;
+        top: -28px;
+        left: 0;
+        padding: 10px 0;
+        color: #fff;
+        font-size: 12px;
+        letter-spacing: 1px;
+        transition: 0.5s;
+        pointer-events: none;
+      }
+
+      input:focus~label {
+        top: -20px;
+        left: 0;
+        // color: #1890ff;
+
+        font-size: 16px;
+      }
+    }
+
+    .btn-warp {
+      display: flex;
+      // justify-content: space-between;
+      justify-content: center;
+
+      .btn {
+        color: #fff;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .icon {
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+
+        &:hover {
+          color: #40a9ff;
+        }
+      }
+    }
+
+    .animation {
+      transform: rotateY(360deg);
+      transition: all 2s ease;
+    }
+  }
+}

@@ -3,9 +3,9 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 17:37:44
+ * @LastEditTime: 2022-06-29 18:35:49
  */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Spin, Button } from 'antd';
 import type { MenuProps } from 'antd';
 import {
@@ -14,12 +14,14 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons';
-import './index.less';
+import classNames from 'classnames';
+import Header from "./Header"
+import style from './index.module.less';
 import { connect, history } from 'umi';
 import { autoFixContext } from 'react-activation';
 import LogoText from '@/assets/image/logoText.png';
 import LogoOnly from '@/assets/image/logoOnly.png';
-import globalConfig from "./globalConfig"
+import globalConfig from "@/utils/globalConfig"
 // 自动修复特定版本Context数据共享问题 (勿删！！！)
 autoFixContext(
   [require('react/jsx-runtime'), 'jsx', 'jsxs', 'jsxDEV'],
@@ -47,67 +49,46 @@ const menuList = [
     icon: <PieChartOutlined />,
   },
 ];
-const navList = [
-  {
-    label: 'nav1',
-    path: '/demo',
-    key: '/nav1',
-  },
-  {
-    label: 'nav2',
-    path: '/demo',
-    key: '/nav2',
-  },
-]
-const { Content, Sider, Header } = Layout;
+const { Content, Sider } = Layout;
 interface Iprops {
   children: any
 }
 const LayoutPage: React.FC<Iprops> = (props) => {
-  globalConfig()
   const layoutLoading = false;
-  const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);
+  const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);// 侧边栏是否收缩
+  useEffect(() => {
+    globalConfig()
+  }, [])
   // 菜单点击 
   const menuClick: MenuProps['onClick'] = e => {
     history.push(e.key);
   };
   return (
     <Spin spinning={layoutLoading}>
-      <Layout className="layout-warp">
-        <Header
-          className={
-            'header' + ' ' + `${leftSiderCollapsed ? 'header__collapsed' : ''}`
-          }
-        >
-          <Menu
-            className="header-menu"
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            items={navList}
-          />
-        </Header>
+      <Layout className={style['layout-warp']}>
+        <Header leftSiderCollapsed={leftSiderCollapsed} />
         <Layout>
           <div
             className={
-              'sider-warp' +
-              ' ' +
-              `${leftSiderCollapsed ? 'sider-warp__collapsed' : ''}`
+              classNames(
+                style['sider-warp'],
+                leftSiderCollapsed ? style['sider-warp__collapsed'] : ''
+              )
             }
           />
           <Sider
-            className="sider"
+            className={style.sider}
             collapsed={leftSiderCollapsed}
             collapsedWidth="50"
             onCollapse={() => setLeftSiderCollapsed((t) => !t)}
           >
             {leftSiderCollapsed ? (
-              <div className="logo-warp is-center">
-                <img src={LogoOnly} alt="logo" className="logo-only" />
+              <div className={classNames(style["logo-warp"], style["is-center"])}>
+                < img src={LogoOnly} alt="logo" className={style["logo-only"]} />
               </div>
             ) : (
-              <div className="logo-warp">
-                <img src={LogoText} alt="logo" className="logo-text" />
+              <div className={style["logo-warp"]}>
+                <img src={LogoText} alt="logo" className={style["logo-text"]} />
               </div>
             )}
 
@@ -116,7 +97,9 @@ const LayoutPage: React.FC<Iprops> = (props) => {
               theme="light"
               defaultSelectedKeys={['1']}
               mode="inline"
-              className="left-menu"
+              className={
+                style["left-menu"]
+              }
               items={menuList}
             >
               {/* 此写法新版本报警告 */}
@@ -145,10 +128,10 @@ const LayoutPage: React.FC<Iprops> = (props) => {
               })} */}
             </Menu>
             <div
-              className="button-wapr"
+              className={style["button-wapr"]}
               onClick={() => setLeftSiderCollapsed((t) => !t)}
             >
-              <Button type="primary" size="middle" className="bottom-btn">
+              <Button type="primary" size="middle" className={style["bottom-btn"]}>
                 {leftSiderCollapsed ? (
                   <MenuUnfoldOutlined />
                 ) : (
@@ -158,12 +141,12 @@ const LayoutPage: React.FC<Iprops> = (props) => {
             </div>
           </Sider>
 
-          <Layout className="layout-right">
-            <Content className="content">{props.children}</Content>
+          <Layout className={style["layout-right"]}>
+            <Content className={style.content}>{props.children}</Content>
           </Layout>
         </Layout>
       </Layout>
-    </Spin>
+    </Spin >
   );
 };
 export default connect((index) => index)(LayoutPage);

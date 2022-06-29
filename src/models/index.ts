@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-01 16:49:07
  * @LastEditors: JayShen
- * @LastEditTime: 2021-11-01 20:46:37
+ * @LastEditTime: 2022-06-29 13:31:25
  */
 let color;
 if (typeof window === 'undefined') {
@@ -13,10 +13,9 @@ if (typeof window === 'undefined') {
 }
 export default {
   namespace: 'index', // 表示在全局 state 上的 key
-  state: {
+  state: { // 状态数据
     color: color,
-    // color: "#333"
-  }, // 状态数据
+  },
   reducers: {
     setCount(state: string, action: any) {
       state = action.payload;

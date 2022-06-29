@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 17:47:56
+ * @LastEditTime: 2022-06-29 18:36:14
  */
 import CommonBox from '@/common/CommonBox';
 import { getArticleList } from '@/services';
@@ -40,9 +40,10 @@ const Demo = (props: any) => {
 
   const getData = debounce(() => {
     getArticleList({
-      demo: 1,
-      total: 'ss'
-    }).then(() => { });
+    }).then((res) => {
+      if (res.code === 200) {
+      }
+    });
   }, 0)
 
   const clickDemo = () => {
@@ -97,11 +98,11 @@ const Demo = (props: any) => {
         ZoomImg组件使用:
         <ZoomImg src={srcList[0]} marginGroup='0px 10px' isText={true} >
           <span className={style.view}>
-            点击看图1
+            点击看图
           </span>
         </ZoomImg>
         <ZoomImg src={''} marginGroup='0px 10px' width={60} />
-        <ZoomImg src={srcList[1]} srcList={srcList} width={60} />
+        <ZoomImg src={srcList[1]} srcList={srcList} width={160} />
       </CommonBox>
       <CommonBox marginGroup='20px 0px'>
         svg使用方式:
@@ -112,7 +113,7 @@ const Demo = (props: any) => {
         <button onClick={() => getData()}>调取接口</button>
       </CommonBox>
       <CommonBox marginGroup="20px 0px">
-        <h1 className='demo-text'>主题变色：</h1>
+        <h1 className={style.view}>主题变色：</h1>
         <button onClick={() => handleChange('light')}>换颜色1</button>
         <button onClick={() => handleChange('dark')}>换颜色2</button>
         <div>当前颜色：{getTheme()}</div>
@@ -137,6 +138,9 @@ const Demo = (props: any) => {
             name: '变量：',
           },
         )}
+      </CommonBox>
+      <CommonBox marginGroup="20px 0px" height="180px">
+        123
       </CommonBox>
     </div>
   );

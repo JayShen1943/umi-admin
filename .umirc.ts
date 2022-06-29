@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 17:17:00
+ * @LastEditTime: 2022-06-29 16:03:06
  */
 import { defineConfig } from 'umi';
 import Routes from './src/routers';
@@ -22,14 +22,13 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  fastRefresh: {},
+  // fastRefresh: {},
   locale: {
     default: 'zh-CN',
     antd: true, // ant国际化
     title: true, // 页面标题国际化
   },
-  antd: {
-  },
+  antd: {},
   dva: {
     immer: true, // 方便修改 reducer
     hmr: true, // 热更新,

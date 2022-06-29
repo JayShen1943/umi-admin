@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-24 10:55:05
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-24 16:56:54
+ * @LastEditTime: 2022-06-29 11:05:43
  */
 import md5 from "md5";
 
@@ -27,8 +27,8 @@ export default {
         return newObj;
     },
 
-    disposeSign(obj: any, dateTime: number) {
-        obj.timestamp = dateTime
+    disposeSign(obj: any) {
+        // obj.timestamp = new Date().getTime()
         const sortData = this.objKeySort(obj);
         const dataList = [] as any
         let dataString = "";

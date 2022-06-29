@@ -3,12 +3,12 @@
  * @Author: JayShen
  * @Date: 2022-06-22 15:56:57
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-23 09:39:44
+ * @LastEditTime: 2022-06-29 17:00:37
  */
 import { notification } from 'antd';
-// import {
-//     clearRequestMap
-// } from "@/utils/preventRequest"
+import {
+    clearRequestMap
+} from "@/utils/preventRequest"
 // codeMessage仅供参考 具体根据和后端协商,在详细定义.
 const codeMessage = {
     200: '服务器成功返回请求的数据。',
@@ -40,7 +40,7 @@ const errorHandler = (error: Error): Response => {
             ?.json()
             ?.then((res: any) => {
                 // 后端返回错误信息,就用后端传回的
-                errorText = res.msg ? res.msg : errorText;
+                errorText = res.message ? res.message : errorText;
                 notification.error({
                     message: `请求错误 ${status}: ${url}`,
                     description: errorText,
@@ -52,6 +52,7 @@ const errorHandler = (error: Error): Response => {
             message: '网络异常',
         });
     }
+    clearRequestMap()
     return response;
 };
 
