@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-20 08:47:00
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 17:33:59
+ * @LastEditTime: 2022-06-30 13:43:38
 -->
 
 ## project
@@ -149,6 +149,8 @@ svg代码压缩：https://www.zhangxinxu.com/sp/svgo/ （可以大幅度减少�
 ### 8.ESlint
 项目启用了eslint代码规范，根据日常开发逐步完善eslintrc.js文件（不得私自修改），为防止eslint触发过于频繁导致卡顿和影响开发效率，所以在git commit 时被动触发eslint ，主动触发也可以直接输入命令 yarn lint ，若不解决终端打印的error或者warning 将无法提交代码！
 
-### 9.Example Page
+### 9.异步请求错误返回
+报错处理统一在@/src/utils/errorHandler.ts，无需再在业务代码里抛出message。
+### 10.Example Page
 1. dva数据管理、国际化使用、公共组件使用示例： src/page/demo.tsx 
 2. react实现keepAlive示例： src/page/keepAliveDemo.tsx

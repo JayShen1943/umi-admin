@@ -3,10 +3,11 @@
  * @Author: JayShen
  * @Date: 2021-10-30 11:22:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 15:46:40
+ * @LastEditTime: 2022-06-30 18:00:59
  */
-@import './styles/theme.less';
+@import '~antd/dist/antd.variable.min.css';
 @import './styles/antd.less';
+@import './styles/variables.less';
 
 body,
 dl,
@@ -30,9 +31,7 @@ th,
 td {
   margin: 0;
   padding: 0;
-  font-weight: 400;
-  font-family: Helvetica, Arial, sans-serif;
-  text-align: left;
+  font-family: PingFangSC, Microsoft Yahei, Songti;
   color: #333;
 }
 
@@ -41,26 +40,11 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  /* color: @text-color; */
   /* font-size: 28px; */
   background: #e2edff;
 }
 
-#root {
-  padding: 10px;
-
-  &::before {
-    position: fixed;
-    top: 0px;
-    left: 0;
-    z-index: 10;
-    display: block;
-    width: 100vw;
-    height: 10px;
-    background: #e2edff;
-    content: '';
-  }
-}
+#root {}
 
 fieldset,
 img {
@@ -91,3 +75,11 @@ ul {
   visibility: hidden;
   content: '';
 }
+
+// .ant-btn-primary {
+//   background: var(--color-text-brand);
+
+//   &:hover {
+//     background: var(--color-text-brand);
+//   }
+// }

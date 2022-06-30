@@ -3,10 +3,12 @@
  * @Author: JayShen
  * @Date: 2022-06-22 16:13:35
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 17:45:34
+ * @LastEditTime: 2022-06-30 10:57:58
  */
 import JSEncrypt from 'jsencrypt';
 import defaultImg from '@/assets/image/defaultImg.png'
+import { history } from 'umi';
+
 /**
  * @Description: 函数防抖 (只执行最后一次点击)
  * @Author: JayShen
@@ -104,3 +106,24 @@ export const rsaEncrypt = (data: string): string | boolean => {
     const encrypted = encrypt.encrypt(data);
     return encrypted;
 };
+
+/**
+ * @Description: 清除Token缓存 退出登录
+ * @Author: JayShen
+ * @param {*}
+ */
+export const signOut = (): void => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userInfo');
+    history.replace('/login');
+}
+
+/**
+ * @Description: 判断是否有token
+ * @Author: JayShen
+ * @param {*}
+ */
+export const getToken = (): string | null => {
+    const token = localStorage.getItem('token');
+    return token
+}

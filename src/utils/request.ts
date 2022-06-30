@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 09:03:16
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 17:29:59
+ * @LastEditTime: 2022-06-30 13:30:19
  */
 
 import { extend } from 'umi-request';
@@ -45,6 +45,7 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit): any
     version: '1.0', // 版本号 
     'tenant-id': 0, // 租户id
     ...appendHeaders,
+    'Accept-Language': ''
   };
   // 重复请求拦截开关 以openPreventRequest参数为准，post请求下默认为true  可手动false关闭
   options.openPreventRequest = (options.openPreventRequest || (options.openPreventRequest === undefined && options.method?.toUpperCase() === 'POST')) ? true : false
@@ -57,6 +58,7 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit): any
   ) {
     options.params = options.data;
   }
+
   // 检查是否存在重复请求，若存在则取消已发的请求
   if (options.openPreventRequest) {
     if (checkRepeatRequest(options)) {
@@ -75,12 +77,7 @@ request.interceptors.request.use((url: string, options: RequestOptionsInit): any
 });
 
 request.interceptors.response.use(async (response: Response, options: RequestOptionsInit) => {
-  const data = await response.clone().json();
-  // token失效 退出来
-  // if (data.code === 'INVALID_TOKEN') {
-  //     localStorage.clear();
-  //     return
-  // }
+  // 开启重复请求拦截的接口请求结束后要清除掉
   if (options.openPreventRequest) {
     if (typeof options.data === 'string') {
       // 可能response里面返回的config.data是个字符串对象
@@ -88,11 +85,14 @@ request.interceptors.response.use(async (response: Response, options: RequestOpt
     }
     removeRequest(options)
   }
-  if (data) {
-    // 开启重复请求拦截的接口请求结束后要清除掉
+
+  const data = await response.clone().json();
+  if (data?.code === 200) {
     return response;
+  } else {
+    return Promise.reject(data);
   }
-  return Promise.reject(data); //注意：需要reject出去才会在请求不成功或返回错误的code时调用errorHandler
 });
+
 
 export default request;

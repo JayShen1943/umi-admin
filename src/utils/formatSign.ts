@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-24 10:55:05
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 11:05:43
+ * @LastEditTime: 2022-06-30 13:39:20
  */
 import md5 from "md5";
 
@@ -62,7 +62,6 @@ export default {
         // 增加盐值
         dataString =
             dataString.substr(0, dataString.length - 1) + "&salt=detimesmicro666";
-        // console.log(dataString);
         // md5加密
         sign = md5(dataString).toUpperCase();
         return sign;

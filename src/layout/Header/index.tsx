@@ -3,11 +3,11 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:25:22
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 18:39:19
+ * @LastEditTime: 2022-06-30 17:55:09
  */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Layout, Menu, Dropdown } from 'antd';
-import { history, useStore } from 'umi';
+import { useStore } from 'umi';
 import defaultImg from '@/assets/image/defaultImg.png'
 import classNames from 'classnames';
 import {
@@ -15,34 +15,18 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import style from "./index.module.less"
+import { signOut } from "@/utils/tools"
 type TProps = {
     leftSiderCollapsed: boolean
 }
 const Header: React.FC<TProps> = ({ leftSiderCollapsed }) => {
     const state = useStore();
     const { userInfo = {} } = state.getState().globalModel;
-    const [userState, setUserState] = useState({} as any);
     // const [visible, setVisible] = useState(false);
-    // 下拉菜单
-    const init = () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            history.replace('/login');
-        }
-        setUserState(userInfo);
-    };
-    // 退出登录
-    const signOut = () => {
-        localStorage.clear();
-        history.replace('/login');
-    };
     // 修改密码
     const updatePwdClick = () => {
         // setVisible(true);
     };
-    useEffect(() => {
-        init();
-    }, []);
     const downOptions = [
         {
             label: '修改密码',
@@ -75,7 +59,7 @@ const Header: React.FC<TProps> = ({ leftSiderCollapsed }) => {
             <Dropdown overlay={downMenu}>
                 <div className={style["user-warp"]} onClick={(e) => e.preventDefault()}>
                     <img className={style.avatar} src={defaultImg} alt="avatar" />
-                    <div className={style.username}>{userState.username}</div>
+                    <div className={style.username}>{userInfo.username || '默认姓名'}</div>
                     <DownOutlined className={style["down-icon"]} />
                 </div>
             </Dropdown>

@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-03 10:48:09
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 13:42:37
+ * @LastEditTime: 2022-06-30 13:39:10
  */
 
 import type { Effect, ImmerReducer } from 'umi';
@@ -48,7 +48,6 @@ const GlobalModel: GlobalModelType = {
   reducers: { // 管理同步方法，必须是纯函数
     // 登录信息
     setUserInfo(state, action) {
-      console.log(action, 'state, action');
       state.userInfo = JSON.parse(JSON.stringify(action.payload));
       localStorage.setItem('userInfo', JSON.stringify(action.payload));
     },

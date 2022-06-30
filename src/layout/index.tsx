@@ -3,10 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 18:35:49
+ * @LastEditTime: 2022-06-30 17:09:44
  */
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Spin, Button } from 'antd';
+import { Layout, Menu, Spin, Button, ConfigProvider } from 'antd';
 import type { MenuProps } from 'antd';
 import {
   DesktopOutlined,
@@ -17,7 +17,7 @@ import {
 import classNames from 'classnames';
 import Header from "./Header"
 import style from './index.module.less';
-import { connect, history } from 'umi';
+import { connect, history, useStore } from 'umi';
 import { autoFixContext } from 'react-activation';
 import LogoText from '@/assets/image/logoText.png';
 import LogoOnly from '@/assets/image/logoOnly.png';
@@ -54,6 +54,11 @@ interface Iprops {
   children: any
 }
 const LayoutPage: React.FC<Iprops> = (props) => {
+  const state = useStore();
+  const { color } = state.getState().index;
+  ConfigProvider.config({
+    theme: { primaryColor: color, },
+  });
   const layoutLoading = false;
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);// 侧边栏是否收缩
   useEffect(() => {

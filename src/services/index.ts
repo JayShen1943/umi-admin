@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 10:29:16
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 17:43:31
+ * @LastEditTime: 2022-06-30 13:48:38
  */
 import request from '@/utils/request';
 const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
@@ -17,7 +17,7 @@ const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
  * @param {String} headers 请求头覆盖参数
  */
 export const demoA = (params: any) => {
-  return request(`${apis}/admin-api/auth/get-test`, {
+  return request(`${apis}/demo`, {
     method: 'GET',
     data: params,
     // prefix: 'http://localhost:123',
@@ -30,24 +30,14 @@ export const demoA = (params: any) => {
   });
 };
 
-// 获取文章列表
-export const getArticleList = (params?: any) => {
-  return request<API.Response<API.PageList>>(`${apis}/article/pageList`, {
+// 获取实体测试
+export const getObjTest = (params?: any) => {
+  return request<API.Response>(`${apis}/admin-api/test/object-test`, {
     method: 'get',
     data: params,
     openPreventRequest: true,
   });
 };
 
-export const login = (
-  params: {
-    username: string;
-    password: string
-  }) => {
-  return request<API.Response>(`${apis}/admin-api/auth/login`, {
-    method: 'post',
-    data: params,
-  });
-};
 
 
