@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-22 15:56:57
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 13:45:08
+ * @LastEditTime: 2022-07-01 10:10:21
  */
 import { notification } from 'antd';
 import {
@@ -75,7 +75,7 @@ const errorHandler = (error: Error): Error<Response> => {
             codeMessage[status as mapCode] || '您的网络异常，无法连接服务器';
         notification.error({
             // description: errorText,
-            message: `${status || ''} ${errorText}`,
+            message: `${errorText}`,
         });
         return error
     }

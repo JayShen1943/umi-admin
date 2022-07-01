@@ -47,11 +47,11 @@ const Login = () => {
     });
     if (res.code === 200) {
       dispatch({
-        type: 'globalModel/setUserInfo',
+        type: 'global/setUserInfo',
         payload: res.data,
       });
       dispatch({
-        type: 'globalModel/setToken',
+        type: 'global/setToken',
         payload: res.data.token,
       });
       history.push('/');

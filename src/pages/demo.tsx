@@ -3,25 +3,25 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 18:04:36
+ * @LastEditTime: 2022-07-01 17:57:00
  */
 import CommonBox from '@/common/CommonBox';
-import { getObjTest } from '@/services';
-import { getLocale, setLocale, useDispatch, useIntl, useStore, connect } from 'umi';
+import { getObjTest } from '@/services/users';
+import { getLocale, setLocale, useDispatch, useIntl, useSelector } from 'umi';
 import style from "./demo.module.less"
 import { debounce, formatImg } from '@/utils/tools';
 import SvgIcon from '@/common/SvgIcon';
 import ZoomImg from '@/common/ZoomImg';
 import { Button, Input, Switch } from "antd"
-const Demo = (props: any) => {
+const Demo = () => {
   const intl = useIntl();
   // connect写法
-  const { dispatch } = props;
-  // hooks写法 获取所有model
-  const state = useStore();
-  const dispatchHooks = useDispatch();
-  const { color } = state.getState().index;
-  const { userInfo } = state.getState().globalModel;
+  // const { dispatch } = props;
+
+  // hooks写法 获取model
+  const dispatch = useDispatch();
+  const store: any = useSelector(state => state)
+  const { userInfo, primaryColor } = store.global
   const getData = debounce(() => {
     getObjTest({
       code: 0
@@ -31,21 +31,13 @@ const Demo = (props: any) => {
     });
   }, 0)
 
-  const clickDemo = () => {
-    if (color === '#1890ff') {
-      dispatchHooks({
-        type: 'index/setCount', //指定哪个 model 层里面的哪个 方法
-        payload: { color: '#25b864' },
-        //需要传递到 model 层里面的参数。
-      });
-      localStorage.setItem('color', '#25b864');
-    } else {
-      dispatchHooks({
-        type: 'index/setCount',
-        payload: { color: '#1890ff' },
-      });
-      localStorage.setItem('color', '#1890ff');
-    }
+  // 主题颜色切换
+  const changeColor = (value: string) => {
+    dispatch({
+      type: 'global/setPrimaryColor', //指定哪个 model 层里面的哪个 方法
+      payload: value
+      //需要传递到 model 层里面的参数。
+    });
   };
   // 语言切换
   const clickLang = () => {
@@ -58,7 +50,7 @@ const Demo = (props: any) => {
   const globalClick = () => {
     if (userInfo.name === '周杰伦') {
       dispatch({
-        type: 'globalModel/setUserInfo',
+        type: 'global/setUserInfo',
         payload: {
           name: '张国荣',
           age: 40,
@@ -67,7 +59,7 @@ const Demo = (props: any) => {
       });
     } else {
       dispatch({
-        type: 'globalModel/setUserInfo',
+        type: 'global/setUserInfo',
         payload: {
           name: '周杰伦',
           age: 30,
@@ -76,13 +68,36 @@ const Demo = (props: any) => {
       });
     }
   };
+  const colorList = [
+    {
+      label: '默认蓝',
+      value: '#1890FF'
+    },
+    {
+      label: '宝强绿',
+      value: '#25b864'
+    },
+    {
+      label: '高级黑',
+      value: '#040404'
+    },
+    {
+      label: "迷人粉",
+      value: '#F286AD'
+    },
+    {
+      label: "基佬紫",
+      value: '#A960C2'
+    },
+    {
+      label: '柿子红',
+      value: "#ff6a00"
+    }
+  ]
   const srcList = ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp']
   return (
     <div>
       <CommonBox marginGroup='20px 0px'>
-        <Input defaultChecked />
-        <Switch defaultChecked />
-        <Switch size="small" defaultChecked />
         ZoomImg组件使用:
         <ZoomImg src={srcList[0]} marginGroup='0px 10px' isText={true} >
           <span className={style.view}>
@@ -100,13 +115,36 @@ const Demo = (props: any) => {
         <img src={formatImg('')} alt="" />
         <Button type='primary' onClick={() => getData()}>调取接口</Button>
       </CommonBox>
-      <CommonBox marginGroup="20px 0px">
-        <h1 className={style.view}>主题变色：</h1>
-        <Button type='primary'>按钮</Button>
+      <CommonBox >
+        当前颜色：{primaryColor}
+        <div>
+          {
+            colorList.map(item => {
+              return (
+                <div key={item.value} className={style.bgcolor} style={{ background: item.value }} onClick={() => changeColor(item.value)}>
+                  <span className={style.text}>
+                    {item.label}
+                  </span>
+                </div>
+              )
+            })
+          }
+        </div>
       </CommonBox>
-      <CommonBox height="80px">
-        <h1>dva数据管理:</h1>
-        <Button onClick={() => clickDemo()}>换颜色</Button>当前颜色：{color}
+      <CommonBox>
+        主题组件展示：
+        <div className='box'>
+          <Input defaultChecked />
+        </div>
+        <div className='box'>
+          <Switch defaultChecked />
+          <Switch size="small" defaultChecked />
+        </div>
+        <div className='box'>
+          <h1 className={style.view}>主题变色：</h1>
+          <Button type='primary'>按钮</Button>
+          <Button>无背景色</Button>
+        </div>
       </CommonBox>
       <CommonBox marginGroup="20px 0px">
         <h1>dva数据管理（hooks）:</h1>
@@ -125,9 +163,6 @@ const Demo = (props: any) => {
           },
         )}
       </CommonBox>
-      <CommonBox marginGroup="20px 0px" height="280px">
-        123
-      </CommonBox>
     </div>
   );
 };
@@ -140,20 +175,22 @@ const Warp = (props: any) => {
   );
 };
 
+export default Warp;
+
 // 写法一 ：
-export default connect((index) => index)(Warp);
+// export default connect((all) => all)(Warp);
 
 // 写法二
-// export default connect(({ index, globalModel }: any) => ({
+// export default connect(({ index, global }: any) => ({
 //   index,
-//   globalModel,
+//   global,
 // }))(Warp);
 
 // 写法三
 // function mapStateToProps(state: any) {
 //   return {
-//     color: state.index.color,
-//     userInfo: state.globalModel.userInfo
+//     primaryColor: state.global.primaryColor,
+//     userInfo: state.global.userInfo
 //   };
 // }
 // export default connect(mapStateToProps)(Warp);

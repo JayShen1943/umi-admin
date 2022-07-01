@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 17:09:44
+ * @LastEditTime: 2022-07-01 16:38:40
  */
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Spin, Button, ConfigProvider } from 'antd';
@@ -55,9 +55,9 @@ interface Iprops {
 }
 const LayoutPage: React.FC<Iprops> = (props) => {
   const state = useStore();
-  const { color } = state.getState().index;
+  const { primaryColor } = state.getState().global;
   ConfigProvider.config({
-    theme: { primaryColor: color, },
+    theme: { primaryColor: primaryColor, },
   });
   const layoutLoading = false;
   const [leftSiderCollapsed, setLeftSiderCollapsed] = useState(false);// 侧边栏是否收缩
@@ -154,4 +154,5 @@ const LayoutPage: React.FC<Iprops> = (props) => {
     </Spin >
   );
 };
-export default connect((index) => index)(LayoutPage);
+// export default LayoutPage
+export default connect((global) => global)(LayoutPage);

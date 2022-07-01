@@ -21,7 +21,7 @@ type TProps = {
 }
 const Header: React.FC<TProps> = ({ leftSiderCollapsed }) => {
     const state = useStore();
-    const { userInfo = {} } = state.getState().globalModel;
+    const { userInfo = {} } = state.getState().global;
     // const [visible, setVisible] = useState(false);
     // 修改密码
     const updatePwdClick = () => {

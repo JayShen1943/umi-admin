@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 18:01:16
+ * @LastEditTime: 2022-07-01 14:50:38
  */
 import { defineConfig } from 'umi';
 import Routes from './src/routers';
@@ -25,11 +25,12 @@ export default defineConfig({
     title: true, // 页面标题国际化
   },
   antd: {
-    disableBabelPluginImport: true
+    disableBabelPluginImport: true // 禁用按需引入
   },
   dva: {
     immer: true, // 方便修改 reducer
     hmr: true, // 热更新,
+    // skipModelValidate: true
   },
   mfsu: {},
   metas: [

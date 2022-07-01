@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-20 08:47:00
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 13:43:38
+ * @LastEditTime: 2022-07-01 14:50:33
 -->
 
 ## project
@@ -154,3 +154,33 @@ svg代码压缩：https://www.zhangxinxu.com/sp/svgo/ （可以大幅度减少�
 ### 10.Example Page
 1. dva数据管理、国际化使用、公共组件使用示例： src/page/demo.tsx 
 2. react实现keepAlive示例： src/page/keepAliveDemo.tsx
+
+### 11.dva使用注意！！！
+获取/修改 dva大致分两种用法：
+#### 1.使用connect连接，props内部获取和改变数据
+```ts
+import { connect } from 'umi';
+const Demo = (props: any) => {
+  const { dispatch } = props;
+  dispatch({
+    type: 'global/setPrimaryColor',
+    payload: '#1890FF'
+  });
+export default connect((all) => all)(Demo);
+}
+```
+#### 2.使用提供的hooks直接获取 避免connect写法(推荐)
+踩坑：useStore 不是响应性的！！！ 全部使用useSelector即可
+```ts
+import { useStore, useSelector } from 'umi';
+  const Demo = (props: any) => {
+  const dispatch = useDispatch();
+  const state = useStore(); // 避免用这种
+  const store2 = useSelector(state => state) // 用这种
+  dispatch({
+    type: 'global/setPrimaryColor',
+    payload: '#1890FF'
+  });
+export default Demo;
+}
+```
