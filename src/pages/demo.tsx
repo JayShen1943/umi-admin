@@ -3,17 +3,20 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-01 17:57:00
+ * @LastEditTime: 2022-07-04 14:22:38
  */
 import CommonBox from '@/common/CommonBox';
-import { getObjTest } from '@/services/users';
+// import { getObjTest } from '@/services/users';
 import { getLocale, setLocale, useDispatch, useIntl, useSelector } from 'umi';
 import style from "./demo.module.less"
 import { debounce, formatImg } from '@/utils/tools';
 import SvgIcon from '@/common/SvgIcon';
 import ZoomImg from '@/common/ZoomImg';
-import { Button, Input, Switch } from "antd"
+import { Button, Input, Switch, Pagination } from "antd"
+import usePagination from '@/hooks/usePagination';
+import { useEffect } from 'react';
 const Demo = () => {
+  const { pageIndex, pageSize, pageTotal = 10, showTotal, setPageTotal, onchange, onShowSizeChange } = usePagination()
   const intl = useIntl();
   // connect写法
   // const { dispatch } = props;
@@ -22,14 +25,20 @@ const Demo = () => {
   const dispatch = useDispatch();
   const store: any = useSelector(state => state)
   const { userInfo, primaryColor } = store.global
+
   const getData = debounce(() => {
-    getObjTest({
-      code: 0
-    }).then((res) => {
-      if (res.code === 200) {
-      }
-    });
+    // getObjTest({
+    //   code: 0
+    // }).then((res) => {
+    //   if (res.code === 200) {
+    //   }
+    // });
+    setPageTotal(101)
   }, 0)
+
+  useEffect(() => {
+    getData()
+  }, [pageIndex, pageSize])
 
   // 主题颜色切换
   const changeColor = (value: string) => {
@@ -144,6 +153,16 @@ const Demo = () => {
           <h1 className={style.view}>主题变色：</h1>
           <Button type='primary'>按钮</Button>
           <Button>无背景色</Button>
+        </div>
+        <div className='box'>
+          <Pagination
+            current={pageIndex}
+            pageSize={pageSize}
+            total={pageTotal}
+            showTotal={() => showTotal}
+            onChange={onchange}
+            onShowSizeChange={onShowSizeChange}
+          />
         </div>
       </CommonBox>
       <CommonBox marginGroup="20px 0px">

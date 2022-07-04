@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:20:02
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-01 17:52:39
+ * @LastEditTime: 2022-07-04 13:27:38
  */
 import request from '@/utils/request';
 const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
@@ -17,7 +17,7 @@ const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
  * @param {String} appendHeaders 请求头追加参数
  * @param {String} headers 请求头覆盖参数
  */
- export const demoA = (params: any) => {
+export const demoA = (params: any) => {
   return request(`${apis}/demo`, {
     method: 'GET',
     data: params,
@@ -60,5 +60,15 @@ export const updatePwd = (params: {
   return request(`${apis}/users/update/pwd`, {
     method: 'POST',
     data: params,
+  });
+};
+
+
+// 获取文章列表
+export const getArticleList = (params: any) => {
+  return request(`${apis}/article/pageList`, {
+    method: 'get',
+    data: params,
+    openPreventRequest: false,
   });
 };

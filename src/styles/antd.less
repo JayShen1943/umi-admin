@@ -4,5 +4,21 @@
 
 // 全局antd 按钮
 .ant-btn {
-  border-radius: 6px !important;
+  border-radius: @radius-small;
+}
+
+// antd pagination 分页器
+
+.ant-pagination {
+  .ant-pagination-item {
+    border-radius: @radius-small;
+  }
+
+  .ant-pagination-item-active {
+    background-color: var(--ant-primary-color);
+
+    a {
+      color: #fff;
+    }
+  }
 }
