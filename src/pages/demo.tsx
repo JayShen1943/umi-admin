@@ -3,17 +3,17 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-04 14:22:38
+ * @LastEditTime: 2022-07-08 15:05:06
  */
 import CommonBox from '@/common/CommonBox';
-// import { getObjTest } from '@/services/users';
+import { users } from '@/services';
 import { getLocale, setLocale, useDispatch, useIntl, useSelector } from 'umi';
 import style from "./demo.module.less"
 import { debounce, formatImg } from '@/utils/tools';
 import SvgIcon from '@/common/SvgIcon';
 import ZoomImg from '@/common/ZoomImg';
 import { Button, Input, Switch, Pagination } from "antd"
-import usePagination from '@/hooks/usePagination';
+import { usePagination } from '@/hooks';
 import { useEffect } from 'react';
 const Demo = () => {
   const { pageIndex, pageSize, pageTotal = 10, showTotal, setPageTotal, onchange, onShowSizeChange } = usePagination()
@@ -27,12 +27,12 @@ const Demo = () => {
   const { userInfo, primaryColor } = store.global
 
   const getData = debounce(() => {
-    // getObjTest({
-    //   code: 0
-    // }).then((res) => {
-    //   if (res.code === 200) {
-    //   }
-    // });
+    users.getObjTest({
+      code: 0
+    }).then((res) => {
+      if (res.code === 200) {
+      }
+    });
     setPageTotal(101)
   }, 0)
 
@@ -103,6 +103,7 @@ const Demo = () => {
       value: "#ff6a00"
     }
   ]
+
   const srcList = ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp']
   return (
     <div>

@@ -3,13 +3,13 @@
  * @Author: JayShen
  * @Date: 2021-11-01 13:57:56
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 12:32:46
+ * @LastEditTime: 2022-07-08 10:07:51
  */
 import { defineConfig } from 'umi';
 let baseUrl = '';
 // baseUrl = "https://www.jayshen1943.com"
-baseUrl = "http://192.168.11.45:8529"
-// baseUrl = "http://localhost:1943"
+// baseUrl = "http://192.168.11.45:8529"
+baseUrl = "http://localhost:8529"
 
 export default defineConfig({
   define: {

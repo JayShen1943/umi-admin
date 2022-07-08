@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-01 16:38:40
+ * @LastEditTime: 2022-07-08 14:52:00
  */
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Spin, Button, ConfigProvider } from 'antd';
@@ -20,7 +20,7 @@ import style from './index.module.less';
 import { connect, history, useStore } from 'umi';
 import { autoFixContext } from 'react-activation';
 import LogoText from '@/assets/image/logoText.png';
-import LogoOnly from '@/assets/image/logoOnly.png';
+import Logo from '@/assets/image/logo.png';
 import globalConfig from "@/utils/globalConfig"
 // 自动修复特定版本Context数据共享问题 (勿删！！！)
 autoFixContext(
@@ -89,7 +89,7 @@ const LayoutPage: React.FC<Iprops> = (props) => {
           >
             {leftSiderCollapsed ? (
               <div className={classNames(style["logo-warp"], style["is-center"])}>
-                < img src={LogoOnly} alt="logo" className={style["logo-only"]} />
+                < img src={Logo} alt="logo" className={style["logo-only"]} />
               </div>
             ) : (
               <div className={style["logo-warp"]}>
@@ -133,16 +133,16 @@ const LayoutPage: React.FC<Iprops> = (props) => {
               })} */}
             </Menu>
             <div
-              className={style["button-wapr"]}
+              className={style["collapsed-wapr"]}
               onClick={() => setLeftSiderCollapsed((t) => !t)}
             >
-              <Button type="primary" size="middle" className={style["bottom-btn"]}>
+              <div className={style["collapsed-flex"]}>
                 {leftSiderCollapsed ? (
                   <MenuUnfoldOutlined />
                 ) : (
                   <MenuFoldOutlined />
                 )}
-              </Button>
+              </div>
             </div>
           </Sider>
 

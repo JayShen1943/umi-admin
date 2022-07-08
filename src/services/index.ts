@@ -1,11 +1,13 @@
 /*
- * @Descripttion: 请求
+ * @Descripttion: 集合导出
  * @Author: JayShen
- * @Date: 2021-11-02 10:29:16
+ * @Date: 2022-07-04 09:30:19
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-01 17:57:28
+ * @LastEditTime: 2022-07-08 15:05:07
  */
+// import { getObjTest } from "./users";
+import * as users from "./users";
 
-import * as users from './users';
-
-export default users
+export {
+    users
+}

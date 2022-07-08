@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:20:02
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-04 13:27:38
+ * @LastEditTime: 2022-07-08 10:26:18
  */
 import request from '@/utils/request';
 const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
@@ -33,7 +33,7 @@ export const demoA = (params: any) => {
 
 // 获取实体测试
 export const getObjTest = (params?: any) => {
-  return request<API.Response>(`${apis}/admin-api/test/object-test`, {
+  return request<API.Response>(`${apis}/admin-api/test/jay-test`, {
     method: 'get',
     data: params,
     openPreventRequest: true,
