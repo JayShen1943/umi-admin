@@ -3,23 +3,23 @@
  * @Author: JayShen
  * @Date: 2022-02-10 15:53:12
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-04 14:13:10
+ * @LastEditTime: 2022-07-14 14:11:55
  */
 import { useState } from 'react';
 const usePagination = () => {
   const [pageSize, setPageSize] = useState<number>(10);
-  const [pageIndex, setPageIndex] = useState<number>(1);
-  const [pageTotal, setPageTotal] = useState<number>(0);
+  const [current, setCurrent] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
 
   const onchange = (current: number) => {
-    setPageIndex(current);
+    setCurrent(current);
   };
 
   const onShowSizeChange = (current: number, pageSize: number) => {
-    setPageIndex(1);
+    setCurrent(1);
     setPageSize(pageSize);
   };
-  const showTotal = `共 ${pageTotal} 条`
+  const showTotal = `共 ${total} 条`
 
   /**
    * pagination分页参数（仅在antd table使用）
@@ -29,7 +29,7 @@ const usePagination = () => {
     showQuickJumper: false,
     showTotal: () => showTotal,
     pageSize: pageSize,
-    total: pageTotal,
+    total: total,
     onChange: (current: number) => onchange(current),
     onShowSizeChange: (current: number, pageSize: number) => {
       onShowSizeChange(current, pageSize);
@@ -37,15 +37,28 @@ const usePagination = () => {
   };
 
   return {
-    pageSize, // 每页展示条数
-    pageIndex,// 当前页
-    pageTotal,// 总条数
-    setPageIndex,// 当前页赋值
-    setPageTotal,// 总条数赋值
-    onchange,// 翻页
-    onShowSizeChange,// 更改每页展示条数
-    showTotal,// 总数展示文案
-    paginationProps,// antd 表格组件所用
+    /** 分页器参数合集 */
+    pagination: {
+      /** 每页展示条数 */
+      pageSize,
+      /** 当前页 */
+      current,
+      /** 总条数 */
+      total,
+      /** 当前页赋值 */
+      setCurrent,
+      /** 总条数赋值 */
+      setTotal,
+      /** 翻页 */
+      onchange,
+      /** 更改每页展示条数 */
+      onShowSizeChange,
+      /** 总数展示文案 */
+      showTotal,
+    },
+    /** Antd表格组件所用 */
+    paginationProps,
+
   };
 };
 export default usePagination;

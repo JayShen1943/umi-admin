@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-23 17:55:58
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 15:07:33
+ * @LastEditTime: 2022-07-14 16:37:34
 */
 import React from 'react';
 import classNames from 'classnames';
@@ -17,12 +17,14 @@ try {
     console.error('importAll:', error);
 }
 type IconProps = {
-    name: string;// svg名称
-    onClick?: () => void;// 点击事件
-    color?: string; // 颜色（部分svg无效）
+    /** svg名称 */
+    name: string;
+    onClick?: () => void;
+    color?: string;
     className?: string;
-    size?: number;// 尺寸
-    pointer?: boolean // 鼠标移入为手
+    size?: number;
+    /** 鼠标移入为手 */
+    pointer?: boolean
 };
 const SvgIcon: React.FC<IconProps> = ({ name, color, size = 30, onClick, className, pointer = false }) => {
     return (

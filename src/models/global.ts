@@ -3,10 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-11-03 10:48:09
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-01 16:39:25
+ * @LastEditTime: 2022-07-13 10:37:55
  */
 
-import { GlobalModelType } from "@/@types/models/globalModel"
+import { TGlobalModelType } from "@/@types/models/globalModel"
 const getUserInfo = () => {
   let userInfo = {
     username: '默认',
@@ -19,7 +19,7 @@ const getUserInfo = () => {
   return userInfo;
 };
 
-const GlobalModel: GlobalModelType = {
+const GlobalModel: TGlobalModelType = {
   namespace: 'global', // 表示在全局 state 上的 key
   state: {
     userInfo: getUserInfo(), // 用户信息

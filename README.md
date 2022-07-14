@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-20 08:47:00
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-01 14:50:33
+ * @LastEditTime: 2022-07-14 16:25:17
 -->
 
 ## project
@@ -62,6 +62,7 @@ yarn lint
     ├── models                      // 全局 models
     ├── services                    // API接口
     ├── styles                      // 样式文件
+    ├── typings                     // ts 声明文件
     ├── utils                       // 实用程序
         ├── authRouter.ts           // 路由守卫
         ├── request.ts              // 网络请求umi-request

@@ -3,18 +3,13 @@
  * @Author: JayShen
  * @Date: 2022-06-22 16:13:35
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 10:57:58
+ * @LastEditTime: 2022-07-14 16:03:17
  */
 import JSEncrypt from 'jsencrypt';
 import defaultImg from '@/assets/image/defaultImg.png'
 import { history } from 'umi';
+// import { useEffect, useCallback, useRef } from 'react';
 
-/**
- * @Description: 函数防抖 (只执行最后一次点击)
- * @Author: JayShen
- * @param {*} fn
- * @param {*} delay
- */
 // 箭头函数泛型写法1
 // const demo: <T>(value: T) => T = value => {
 //     return value
@@ -29,45 +24,92 @@ import { history } from 'umi';
 //     return arg
 // }
 
-export const debounce = (fn: any, delay: number = 200, ...args: any[]) => {
-    /* eslint-disable */
+
+/**
+ * @Description: 原生ts防抖
+ * @Author: JayShen
+ * @param func
+ * @param delay 
+ */
+/* eslint-disable */
+export function debounce<T extends unknown[]>(func: (...args: T) => void, delay: number = 200): (...args: T) => void {
     let timer: NodeJS.Timeout | null
-    return function (this: any): void {
-        if (timer) {
-            clearTimeout(timer)
-        }
+    return (...args: T) => {
+        if (timer) clearTimeout(timer);
         timer = setTimeout(() => {
-            timer = null
-            fn.apply(this, args)
-        }, delay)
-    }
+            // 在非严格模式下当我们第一个参数传递为null或undefined时，函数体内的this会指向默认的宿主对象，在浏览器中则是window
+            func.call(null, ...args);
+        }, delay);
+    };
 }
 
 /**
- * @Description: 函数节流
+ * @Description: 原生ts节流
  * @Author: JayShen
- * @param {*} fn
- * @param {*} t
+ * @param func
+ * @param delay 
  */
-export const throttle = (fn: any, delay: number = 200, ...args: any[]) => {
-    /* eslint-disable */
+/* eslint-disable */
+export function throttle<T extends unknown[]>(func: (...args: T) => void, delay: number = 200): (...args: T) => void {
     let last: number
     let timer: NodeJS.Timeout
-    return function (this: any) {
-        // const args = arguments
+    return (...args: T) => {
         const now = +new Date()
         if (last && now - last < delay) {
             clearTimeout(timer)
             timer = setTimeout(() => {
                 last = now
-                fn.apply(this, args)
+                func.call(null, ...args);
             }, delay)
         } else {
             last = now
-            fn.apply(this, args)
+            func.call(null, ...args);
         }
     }
 }
+
+/**
+ * @Description: hooks防抖(可用，但参数提示不够完善)
+ * @Author: JayShen
+ * @param {*} fn
+ * @param {*} delay
+ */
+// export function useDebounce(fn: any, delay: number = 200, dep: any[] = []) {
+//     const { current } = useRef<any>({ fn, timer: null });
+//     useEffect(function () {
+//         current.fn = fn;
+//     }, [fn]);
+
+//     return useCallback(function f(this: any, ...args) {
+//         if (current.timer) {
+//             clearTimeout(current.timer);
+//         }
+//         current.timer = setTimeout(() => {
+//             current.fn.call(this, ...args);
+//         }, delay);
+//     }, dep)
+// }
+
+/**
+ * @Description: hooks节流(可用，但参数提示不够完善)
+ * @Author: JayShen
+ * @param {*} fn
+ * @param {*} delay
+ */
+// export function useThrottle(fn: any, delay: number = 200, dep: any[] = []) {
+//     const { current } = useRef<any>({ fn, timer: null })
+//     useEffect(function () {
+//         current.fn = fn;
+//     }, [fn]);
+//     return useCallback(function f(this: any, ...args) {
+//         if (!current.timer) {
+//             current.timer = setTimeout(() => {
+//                 delete current.timer
+//             }, delay)
+//             current.fn.call(this, ...args)
+//         }
+//     }, dep)
+// }
 
 
 /**
@@ -126,4 +168,14 @@ export const signOut = (): void => {
 export const getToken = (): string | null => {
     const token = localStorage.getItem('token');
     return token
+}
+
+/**
+ * @Description: 根据环境判断接口是否携带前缀(用于本地代理跨域)
+ * @Author: JayShen
+ * @param {*}
+ */
+export const apiPrefix = (): string => {
+    const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
+    return apis
 }

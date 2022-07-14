@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-24 11:28:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 15:28:44
+ * @LastEditTime: 2022-07-14 16:35:16
  */
 import React, { useState } from "react";
 import { Image, message } from 'antd';
@@ -11,15 +11,22 @@ import classNames from 'classnames';
 import style from "./index.module.less"
 import defaultImg from '@/assets/image/defaultImg.png'
 interface ZoomImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-    isText?: boolean; // 是否为文字
-    src?: string; // 图片地址
+    /** 是否为文字 */
+    isText?: boolean;
+    /** 单张图片地址 */
+    src?: string;
+    /** 多张图片地址 */
     srcList?: string[];
     width?: number;
     heigth?: number;
-    radius?: number //圆角
-    className?: string // 类名
-    alt?: string // 图片描述
-    marginGroup?: string; // margin
+    /** 圆角 */
+    radius?: number
+    /** 类名 */
+    className?: string
+    /** 图片描述 */
+    alt?: string
+    /** margin */
+    marginGroup?: string;
     children?: any
     color?: string
 }

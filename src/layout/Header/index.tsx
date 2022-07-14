@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:25:22
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-30 17:55:09
+ * @LastEditTime: 2022-07-14 10:08:31
  */
 import React from "react";
 import { Layout, Menu, Dropdown } from 'antd';
@@ -55,7 +55,6 @@ const Header: React.FC<TProps> = ({ leftSiderCollapsed }) => {
             }
         >
             <div className={style["nav-warp"]} />
-
             <Dropdown overlay={downMenu}>
                 <div className={style["user-warp"]} onClick={(e) => e.preventDefault()}>
                     <img className={style.avatar} src={defaultImg} alt="avatar" />

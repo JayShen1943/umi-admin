@@ -3,11 +3,11 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:20:02
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-08 10:26:18
+ * @LastEditTime: 2022-07-14 16:25:50
  */
 import request from '@/utils/request';
-const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
-
+import { apiPrefix } from '@/utils/tools';
+import { TLogin } from "@/typings/service/user"
 
 /**
  * @Description: 剩余参数描述
@@ -18,7 +18,7 @@ const apis = CURRENT_ENV === 'dev' ? '/apis' : '';
  * @param {String} headers 请求头覆盖参数
  */
 export const demoA = (params: any) => {
-  return request(`${apis}/demo`, {
+  return request(`${apiPrefix()}/demo`, {
     method: 'GET',
     data: params,
     // prefix: 'http://localhost:123',
@@ -32,8 +32,8 @@ export const demoA = (params: any) => {
 };
 
 // 获取实体测试
-export const getObjTest = (params?: any) => {
-  return request<API.Response>(`${apis}/admin-api/test/jay-test`, {
+export const getObjTest = (params: any) => {
+  return request<API.Response>(`${apiPrefix()}/admin-api/test/jay-test`, {
     method: 'get',
     data: params,
     openPreventRequest: true,
@@ -41,24 +41,9 @@ export const getObjTest = (params?: any) => {
 };
 
 // 用户登录
-export const loginUser = (params: {
-  username: number | string;
-  password: string;
-}) => {
-  return request(`${apis}/admin-api/auth/login`, {
+export const loginUser = (params: TLogin) => {
+  return request<API.Response>(`${apiPrefix()}/admin-api/auth/login`, {
     method: 'post',
-    data: params,
-  });
-};
-
-// 修改用户密码
-export const updatePwd = (params: {
-  oldPwd: string;
-  newPwd: string;
-  confirmPwd: string;
-}) => {
-  return request(`${apis}/users/update/pwd`, {
-    method: 'POST',
     data: params,
   });
 };
@@ -66,7 +51,7 @@ export const updatePwd = (params: {
 
 // 获取文章列表
 export const getArticleList = (params: any) => {
-  return request(`${apis}/article/pageList`, {
+  return request(`${apiPrefix()}/article/pageList`, {
     method: 'get',
     data: params,
     openPreventRequest: false,

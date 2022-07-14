@@ -3,20 +3,23 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-08 15:05:06
+ * @LastEditTime: 2022-07-14 15:55:12
  */
 import CommonBox from '@/common/CommonBox';
 import { users } from '@/services';
 import { getLocale, setLocale, useDispatch, useIntl, useSelector } from 'umi';
 import style from "./demo.module.less"
-import { debounce, formatImg } from '@/utils/tools';
+import { formatImg, debounce } from '@/utils/tools';
 import SvgIcon from '@/common/SvgIcon';
 import ZoomImg from '@/common/ZoomImg';
 import { Button, Input, Switch, Pagination } from "antd"
 import { usePagination } from '@/hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Dialog from '@/common/Dialog';
+import SearchSelect from '@/common/SearchSelect';
 const Demo = () => {
-  const { pageIndex, pageSize, pageTotal = 10, showTotal, setPageTotal, onchange, onShowSizeChange } = usePagination()
+  const { pagination } = usePagination()
+  const { current, pageSize, total = 10, showTotal, setTotal, onchange, onShowSizeChange } = pagination
   const intl = useIntl();
   // connect写法
   // const { dispatch } = props;
@@ -25,7 +28,20 @@ const Demo = () => {
   const dispatch = useDispatch();
   const store: any = useSelector(state => state)
   const { userInfo, primaryColor } = store.global
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false)
 
+  const handleOk = () => {
+    setConfirmLoading(true)
+    setTimeout(() => {
+      setConfirmLoading(false)
+    }, 1000)
+
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  }
   const getData = debounce(() => {
     users.getObjTest({
       code: 0
@@ -33,12 +49,12 @@ const Demo = () => {
       if (res.code === 200) {
       }
     });
-    setPageTotal(101)
-  }, 0)
+    setTotal(101)
+  }, 300)
 
   useEffect(() => {
     getData()
-  }, [pageIndex, pageSize])
+  }, [current, pageSize])
 
   // 主题颜色切换
   const changeColor = (value: string) => {
@@ -107,7 +123,11 @@ const Demo = () => {
   const srcList = ['https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp']
   return (
     <div>
+      <CommonBox>
+        下拉框组件：<SearchSelect placeholder='' />
+      </CommonBox>
       <CommonBox marginGroup='20px 0px'>
+        <Button onClick={() => setIsModalVisible(true)}> 打开弹窗</Button>
         ZoomImg组件使用:
         <ZoomImg src={srcList[0]} marginGroup='0px 10px' isText={true} >
           <span className={style.view}>
@@ -157,9 +177,9 @@ const Demo = () => {
         </div>
         <div className='box'>
           <Pagination
-            current={pageIndex}
+            current={current}
             pageSize={pageSize}
-            total={pageTotal}
+            total={total}
             showTotal={() => showTotal}
             onChange={onchange}
             onShowSizeChange={onShowSizeChange}
@@ -183,7 +203,10 @@ const Demo = () => {
           },
         )}
       </CommonBox>
-    </div>
+      <Dialog title="123" confirmLoading={confirmLoading} visible={isModalVisible} onOk={() => handleOk()} onCancel={handleCancel} >
+        内容
+      </Dialog>
+    </div >
   );
 };
 const Warp = (props: any) => {
