@@ -3,10 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-11-03 10:48:09
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-13 10:37:55
+ * @LastEditTime: 2022-07-14 16:39:13
  */
 
-import { TGlobalModelType } from "@/@types/models/globalModel"
+import { TGlobalModelType } from "@/typings/models/globalModel"
 const getUserInfo = () => {
   let userInfo = {
     username: '默认',
