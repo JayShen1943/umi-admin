@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 18:32:25
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-14 16:07:53
+ * @LastEditTime: 2022-07-16 11:48:09
  */
 /* eslint-disable */
 /** 全局接口数据统一返回 */
@@ -16,9 +16,11 @@ declare namespace API {
     }
     /** 分页数组 */
     type PageList = {
-        list: Array<any>;
+        list: List;
         pageIndex: number;
         pageSize: number
         total: number;
     }
+    /** 数组 */
+    type List = Array<Record<string, unknown>>
 }

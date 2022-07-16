@@ -3,11 +3,11 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:20:02
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-14 16:25:50
+ * @LastEditTime: 2022-07-16 11:52:05
  */
 import request from '@/utils/request';
 import { apiPrefix } from '@/utils/tools';
-import { TLogin } from "@/typings/service/user"
+import type { TLogin } from "@/typings/service/user"
 
 /**
  * @Description: 剩余参数描述
@@ -33,7 +33,7 @@ export const demoA = (params: any) => {
 
 // 获取实体测试
 export const getObjTest = (params: any) => {
-  return request<API.Response>(`${apiPrefix()}/admin-api/test/jay-test`, {
+  return request<API.Response<API.List>>(`${apiPrefix()}/admin-api/test/list-test`, {
     method: 'get',
     data: params,
     openPreventRequest: true,

@@ -3,10 +3,10 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-14 15:55:12
+ * @LastEditTime: 2022-07-16 12:08:39
  */
 import CommonBox from '@/common/CommonBox';
-import { users } from '@/services';
+// import { users } from '@/services';
 import { getLocale, setLocale, useDispatch, useIntl, useSelector } from 'umi';
 import style from "./demo.module.less"
 import { formatImg, debounce } from '@/utils/tools';
@@ -43,12 +43,17 @@ const Demo = () => {
     setIsModalVisible(false);
   }
   const getData = debounce(() => {
-    users.getObjTest({
-      code: 0
-    }).then((res) => {
-      if (res.code === 200) {
-      }
+    // users.getObjTest({
+    //   code: 0
+    // }).then((res) => {
+    //   if (res.code === 200) {
+    //     console.log(res.data);
+    //   }
+    // });
+    dispatch({
+      type: 'menu/getMenu',
     });
+
     setTotal(101)
   }, 300)
 
