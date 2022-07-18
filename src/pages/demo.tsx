@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-16 12:08:39
+ * @LastEditTime: 2022-07-18 16:57:17
  */
 import CommonBox from '@/common/CommonBox';
 // import { users } from '@/services';
@@ -25,8 +25,8 @@ const Demo = () => {
   // const { dispatch } = props;
 
   // hooks写法 获取model
-  const dispatch = useDispatch();
-  const store: any = useSelector(state => state)
+  const dispatch: DVA.Action = useDispatch();
+  const store = useSelector((state: DVA.Models) => state)
   const { userInfo, primaryColor } = store.global
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false)
@@ -50,10 +50,9 @@ const Demo = () => {
     //     console.log(res.data);
     //   }
     // });
-    dispatch({
-      type: 'menu/getMenu',
-    });
-
+    // dispatch({
+    //   type: 'menu/getMenu',
+    // });
     setTotal(101)
   }, 300)
 

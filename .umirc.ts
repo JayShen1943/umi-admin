@@ -3,11 +3,12 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-01 14:50:38
+ * @LastEditTime: 2022-07-18 13:18:25
  */
 import { defineConfig } from 'umi';
 import Routes from './src/routers';
 import path from 'path';
+import variables from "./src/styles/variables"
 export default defineConfig({
   devServer: {
     port: 6008
@@ -39,6 +40,7 @@ export default defineConfig({
       content: 'umi, umijs',
     },
   ],
+  theme: variables,
   routes: Routes,
   chainWebpack(config: any) {
     // 用svg-sprite-loader制作 svg-symbol，让我们可以直接使用 svg-use。

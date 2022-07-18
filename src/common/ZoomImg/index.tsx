@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-24 11:28:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-14 16:35:16
+ * @LastEditTime: 2022-07-18 13:30:47
  */
 import React, { useState } from "react";
 import { Image, message } from 'antd';
@@ -27,7 +27,6 @@ interface ZoomImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     alt?: string
     /** margin */
     marginGroup?: string;
-    children?: any
     color?: string
 }
 const ZoomImg: React.FC<ZoomImgProps> = ({ isText = false, src, width = 160, heigth, radius = 4, srcList = [], alt, className, children, marginGroup = '0px', color = '#4389f1' }) => {

@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-02 16:08:09
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 11:15:19
+ * @LastEditTime: 2022-07-18 16:44:22
  */
 // import Home from '../pages/home'
 // import authRoute from "@/utils/authRoute";
@@ -21,14 +21,14 @@ const routes = [
     // 所有路由都写到routes里面
     routes: [
       {
-        title: 'demo',
+        title: '子菜单1',
         path: '/demo',
         exact: true,
         component: '@/pages/demo',
         // customComponent: Demo
       },
       {
-        title: 'keepAliveDemo',
+        title: '子菜单2',
         path: '/keepAliveDemo',
         exact: true,
         component: '@/pages/keepAliveDemo',

@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 18:32:25
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-16 11:48:09
+ * @LastEditTime: 2022-07-18 11:59:13
  */
 /* eslint-disable */
 /** 全局接口数据统一返回 */
@@ -24,3 +24,4 @@ declare namespace API {
     /** 数组 */
     type List = Array<Record<string, unknown>>
 }
+

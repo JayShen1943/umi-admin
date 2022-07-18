@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-11-03 15:46:04
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-28 15:09:10
+ * @LastEditTime: 2022-07-18 13:30:34
  */
 import React from 'react';
 import style from './index.module.less';
@@ -13,7 +13,6 @@ interface Props {
   marginGroup?: string; // margin
   paddingGroup?: string; // padding
   popperClass?: string; // 自定义类名
-  children?: any;
 }
 const CommonBox: React.FC<Props> = (props) => {
   const {

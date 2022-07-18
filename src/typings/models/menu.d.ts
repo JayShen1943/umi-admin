@@ -3,33 +3,35 @@
  * @Author: JayShen
  * @Date: 2022-07-16 10:44:46
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-16 12:05:38
+ * @LastEditTime: 2022-07-18 17:09:23
  */
 import type { ImmerReducer, Effect, Subscription } from 'umi';
 
-type TMenuItem = {
+type MenuItem = {
     label: string;
     key: string;
     path: string;
     icon?: React.ReactNode | string;
-    children?: Omit<TMenuItem, 'icon'>;
+    children?: Omit<MenuItem[], 'icon'>;
+    // children?: any;
     [key: string]: any;
 }
 
-export type TMenuModelState = {
-    menu: TMenuItem[]
-    historyMenu: TMenuItem[];
+export type MenuModelState = {
+    menu: MenuItem[]
+    historyMenu: MenuItem[];
 }
 
-export type TMenuModelType = {
+export type MenuModelType = {
     namespace: string;
-    state: TMenuModelState;
+    state: MenuModelState;
     effects: {
         getMenu: Effect;
     };
     reducers: {
         // 启用 immer 之后
-        setMenu: ImmerReducer<TMenuModelState>
+        setMenu: ImmerReducer<MenuModelState>
+        setHistoryMenu: ImmerReducer<MenuModelState>
     };
     // subscriptions: { setup: Subscription };
     subscriptions: any

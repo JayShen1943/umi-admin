@@ -3,11 +3,11 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:20:02
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-16 11:52:05
+ * @LastEditTime: 2022-07-18 11:06:14
  */
 import request from '@/utils/request';
 import { apiPrefix } from '@/utils/tools';
-import type { TLogin } from "@/typings/service/user"
+import type { Login } from "@/typings/services/user"
 
 /**
  * @Description: 剩余参数描述
@@ -41,7 +41,7 @@ export const getObjTest = (params: any) => {
 };
 
 // 用户登录
-export const loginUser = (params: TLogin) => {
+export const loginUser = (params: Login) => {
   return request<API.Response>(`${apiPrefix()}/admin-api/auth/login`, {
     method: 'post',
     data: params,

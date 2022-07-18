@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-14 14:07:05
+ * @LastEditTime: 2022-07-18 17:47:53
  */
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Spin, ConfigProvider } from 'antd';
@@ -17,7 +17,7 @@ import {
 import classNames from 'classnames';
 import Header from "./Header"
 import style from './index.module.less';
-import { connect, history, useStore } from 'umi';
+import { history, useDispatch, useSelector } from 'umi';
 import { autoFixContext } from 'react-activation';
 import LogoText from '@/assets/image/logoText.png';
 import Logo from '@/assets/image/logo.png';
@@ -50,12 +50,10 @@ const menuList = [
   },
 ];
 const { Content, Sider } = Layout;
-interface Iprops {
-  children: any
-}
-const LayoutPage: React.FC<Iprops> = (props) => {
-  const state = useStore();
-  const { primaryColor } = state.getState().global;
+const LayoutPage: React.FC = (props) => {
+  const store = useSelector((state: DVA.Models) => state);
+  const { primaryColor } = store.global
+  const dispatch: DVA.Action = useDispatch();
   ConfigProvider.config({
     theme: { primaryColor: primaryColor, },
   });
@@ -67,6 +65,13 @@ const LayoutPage: React.FC<Iprops> = (props) => {
   // 菜单点击 
   const menuClick: MenuProps['onClick'] = e => {
     history.push(e.key);
+    dispatch({
+      type: 'menu/setHistoryMenu',
+      payload: {
+        type: 'add',
+        path: e.key,
+      }
+    })
   };
   return (
     <Spin spinning={layoutLoading}>
@@ -154,5 +159,5 @@ const LayoutPage: React.FC<Iprops> = (props) => {
     </Spin >
   );
 };
-// export default LayoutPage
-export default connect((global) => global)(LayoutPage);
+export default LayoutPage
+// export default connect((global) => global)(LayoutPage);

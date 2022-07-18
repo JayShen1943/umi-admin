@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 12:49:15
  * @LastEditors: JayShen
- * @LastEditTime: 2022-06-29 18:34:04
+ * @LastEditTime: 2022-07-18 13:04:17
  */
 import { useState } from 'react';
 // import { SwapOutlined } from '@ant-design/icons';
@@ -18,7 +18,7 @@ interface PostData {
   password: string;
 }
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch: DVA.Action = useDispatch();
   // const [cutover, setCutover] = useState<Boolean>(true);
   const [postData, setPostData] = useState<PostData>({
     telephone: '',

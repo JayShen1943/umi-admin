@@ -1,12 +1,39 @@
-import { TMenuModelType } from "@/typings/models/menu"
+import { MenuModelType } from "@/typings/models/menu"
 import { users } from '@/services';
-const HistoryNav: TMenuModelType = {
+import { history } from 'umi';
+
+const menuList = [
+    {
+        label: '菜单1',
+        path: '/',
+        key: '/',
+        children: [
+            {
+                label: '子菜单1',
+                path: '/keepAliveDemo',
+                key: '/keepAliveDemo',
+            },
+        ],
+    },
+    {
+        label: '菜单2',
+        path: '/demo',
+        key: '/demo',
+    },
+];
+const HistoryNav: MenuModelType = {
     namespace: 'menu',
     state: {
         /** 菜单栏 */
-        menu: [],
+        menu: menuList,
         /** 历史菜单栏 */
-        historyMenu: []
+        historyMenu: [
+            {
+                label: '首页',
+                path: '/home',
+                key: '/hemo',
+            },
+        ]
     },
 
     effects: {
@@ -24,6 +51,47 @@ const HistoryNav: TMenuModelType = {
     reducers: {
         setMenu(state, action) {
             state.menu = action.payload
+        },
+        // 插入历史菜单
+        setHistoryMenu(state, action) {
+            if (action.payload) {
+                const path = action.payload.path
+                const type = action.payload.type
+                // 1.判断是否已有
+                let repeat = false
+                let delCurrent = 0
+                state.historyMenu.forEach((item, index) => {
+                    if (item.path === path) {
+                        repeat = true
+                        delCurrent = index
+                    }
+                })
+                // 2.插入historyMenu中
+                if (type === 'add') {
+                    if (!repeat) {
+                        const menu = state.menu
+                        menu.forEach((item) => {
+                            if (item?.children?.length) {
+                                item.children.forEach((t: any) => {
+                                    if (t.path === path) {
+                                        state.historyMenu.push(t)
+                                    }
+                                })
+                            } else {
+                                if (item.path === path) {
+                                    state.historyMenu.push(item)
+                                }
+                            }
+                        })
+                    }
+                    // 3.删除选择的   
+                } else if (type === 'del') {
+                    state.historyMenu.splice(delCurrent, 1)
+                    const jumpPath = state.historyMenu[state.historyMenu.length - 1]
+                    history.push(jumpPath.path)
+                }
+            }
+
         }
     }
 }

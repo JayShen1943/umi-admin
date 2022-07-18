@@ -3,12 +3,12 @@
  * @Author: JayShen
  * @Date: 2022-07-11 16:48:38
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-14 15:44:47
+ * @LastEditTime: 2022-07-18 13:29:05
  */
 import React from "react"
 import { Modal, Button } from 'antd'
 import type { ModalProps } from 'antd'
-import style from "./index.module.less"
+import "./index.less"
 import { debounce } from '@/utils/tools'
 // 额外新增props
 type TProps = {
@@ -26,8 +26,8 @@ const Dialog: React.FC<ModalProps & TProps> = (props) => {
         cancelVisible = true,
     } = props
     return (
-        <Modal className={style.dialog}  {...props} maskClosable={maskClosable} footer={
-            <div className={style.footer}>
+        <Modal className='dialog'  {...props} maskClosable={maskClosable} footer={
+            <div>
                 {
                     okVisible && (
                         <Button type="primary" onClick={props.onOk ? debounce((props.onOk), 200) : undefined} loading={props.confirmLoading}>{okText}</Button>
