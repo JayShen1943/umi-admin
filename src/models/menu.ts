@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: JayShen
+ * @Date: 2022-07-16 10:19:15
+ * @LastEditors: JayShen
+ * @LastEditTime: 2022-07-19 12:23:37
+ */
 import { MenuModelType } from "@/typings/models/menu"
 import { users } from '@/services';
 import { history } from 'umi';
@@ -86,9 +93,11 @@ const HistoryNav: MenuModelType = {
                     }
                     // 3.删除选择的   
                 } else if (type === 'del') {
-                    state.historyMenu.splice(delCurrent, 1)
-                    const jumpPath = state.historyMenu[state.historyMenu.length - 1]
-                    history.push(jumpPath.path)
+                    if (delCurrent) {
+                        state.historyMenu.splice(delCurrent, 1)
+                        const jumpPath = state.historyMenu[state.historyMenu.length - 1]
+                        history.push(jumpPath.path)
+                    }
                 }
             }
 

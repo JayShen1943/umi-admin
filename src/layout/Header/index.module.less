@@ -18,57 +18,93 @@
 
   .top-bar {
     display: flex;
-    width: calc(100% - 200px);
+    width: calc(100% - 140px);
     line-height: 46px;
-    overflow: auto;
+    justify-content: space-between;
+    align-items: center;
 
-    &::-webkit-scrollbar {
-      height: 0;
-      width: 0;
-      display: none;
+    .warp {
+      display: flex;
+      -ms-overflow-style: none;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+        display: none;
+      }
+
+      .item {
+        cursor: pointer;
+        transition: all 0.3;
+        white-space: nowrap;
+        border-right: 1px solid #ecf3ff;
+        position: relative;
+
+
+        .label {
+          display: inline-block;
+          box-sizing: border-box;
+          height: 100%;
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+
+        .close {
+          box-sizing: border-box;
+          padding: 8px;
+          font-size: @font-mini;
+          display: none;
+          position: absolute;
+          right: -6px;
+          top: -6px;
+        }
+
+        &:not(&__active) {
+          .label:hover {
+            color: var(--ant-primary-color);
+          }
+
+          .close:hover {
+            color: var(--ant-primary-color);
+          }
+        }
+
+        transition: background .3s;
+
+        &__active {
+          color: #fff;
+          background: var(--ant-primary-color);
+        }
+
+        &:hover {
+          .close {
+            display: inline-block;
+          }
+        }
+      }
+
     }
 
-    .nav {
-      cursor: pointer;
-      transition: all 0.3;
+    .move {
+      box-shadow: 0px 2px 8px 0px rgb(64 134 255 / 36%);
+      text-align: center;
       white-space: nowrap;
-      border-right: 1px solid #ecf3ff;
 
-      .label {
-        display: inline-block;
-        box-sizing: border-box;
-        height: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
-      }
+      .icon {
+        padding: 8px;
+        cursor: pointer;
+        font-size: 16px;
 
-      .close {
-        box-sizing: border-box;
-        padding: 10px;
-        padding-left: 0px;
-        font-size: @font-mini;
-      }
-
-      &:not(&__active) {
-        .label:hover {
+        &:hover {
           color: var(--ant-primary-color);
         }
-
-        .close:hover {
-          color: var(--ant-primary-color);
-        }
-      }
-
-      transition: background .3s;
-
-      &__active {
-        color: #fff;
-        background: var(--ant-primary-color);
       }
     }
   }
 
   .nav-warp {
+    white-space: nowrap;
 
     .header-menu {
       background: #fff;
