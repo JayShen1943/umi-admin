@@ -1,10 +1,3 @@
-<!--
- * @Descripttion: README
- * @Author: JayShen
- * @Date: 2022-06-20 08:47:00
- * @LastEditors: JayShen
- * @LastEditTime: 2022-07-22 11:44:07
--->
 
 ## project
 name: umi-admin
@@ -25,6 +18,16 @@ css: Less
 
 dataManagement：dva 
 
+## Login 
+Telephone: admin;
+
+Pwssword: admin;
+
+## Description
+**项目不含有任何业务代码，可以直接使用。**
+
+支持动态换肤、接口重复请求限制、dva ts代码提示、svg自动引入组件、国际化、react路由守卫、react KeepAlive功能、历史菜单栏、限制用户修改url地址栏、支持三种环境启动和打包、eslint、工具函数、自定义组件、全局less变量、自定义路由、dva使用范例等
+
 ## Build Setup
 
 ``` bash
@@ -44,9 +47,13 @@ yarn build
 yarn lint
 
 ```
-## Login 
-Telephone: admin
-Pwssword: admin
+
+
+
+## Preview
+![1658462227339.jpg](https://qiniu.jayshen1943.com/1658462227339.jpg "1658462227339.jpg")
+![1658462215100.jpg](https://qiniu.jayshen1943.com/1658462215100.jpg "1658462215100.jpg")
+
 ## Directory tree
 
 ```
