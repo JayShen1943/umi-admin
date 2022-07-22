@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 09:54:40
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-18 13:18:25
+ * @LastEditTime: 2022-07-22 09:22:30
  */
 import { defineConfig } from 'umi';
 import Routes from './src/routers';
@@ -14,7 +14,7 @@ export default defineConfig({
     port: 6008
   },
   // 别名配置
-  title: '得体智造前台',
+  title: 'Deti Mes Admin',
   publicPath: './',
   nodeModulesTransform: {
     type: 'none',
