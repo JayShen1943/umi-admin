@@ -31,8 +31,7 @@
     "src/**/*",
     "config/**/*",
     ".umirc.ts",
-    "typings.d.ts",
-    ".eslintrc.js",
+    "typings.d.ts"
   ],
   "exclude": [
     "node_modules",
@@ -43,6 +42,7 @@
     "**/__test__",
     "test",
     "docs",
-    "tests"
+    "tests",
+    ".eslintrc.js",
   ]
 }
