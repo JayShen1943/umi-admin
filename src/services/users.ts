@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 10:20:02
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-18 11:06:14
+ * @LastEditTime: 2022-07-22 11:36:15
  */
 import request from '@/utils/request';
 import { apiPrefix } from '@/utils/tools';
@@ -45,15 +45,5 @@ export const loginUser = (params: Login) => {
   return request<API.Response>(`${apiPrefix()}/admin-api/auth/login`, {
     method: 'post',
     data: params,
-  });
-};
-
-
-// 获取文章列表
-export const getArticleList = (params: any) => {
-  return request(`${apiPrefix()}/article/pageList`, {
-    method: 'get',
-    data: params,
-    openPreventRequest: false,
   });
 };

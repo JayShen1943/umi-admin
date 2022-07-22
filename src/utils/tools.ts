@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-22 16:13:35
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-14 16:03:17
+ * @LastEditTime: 2022-07-22 11:40:08
  */
 import JSEncrypt from 'jsencrypt';
 import defaultImg from '@/assets/image/defaultImg.png'
@@ -142,7 +142,7 @@ export const tranNull = (value: any) => {
  * @param {*}
  */
 export const rsaEncrypt = (data: string): string | boolean => {
-    const publicKey = `MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZIJQ6ILH1Po3o7l38udVVyrjb/caY5RaRtkeBQZT7vEDClOnYjBHLOINONPg8lGDbZtSp9k8UiiWIkufTd6W3b8jXwnQs16OPwLYxJHQXLCpDTx1riPqcpVM8he3NcAPyK//NCwQ+Ha/1EU6Wxv9QbZI25mEcEU8LJh641aMyBQIDAQAB`;
+    const publicKey = `放自己项目的公钥 没有就不使用这个方法`;
     const encrypt = new JSEncrypt();
     encrypt.setPublicKey(publicKey);
     const encrypted = encrypt.encrypt(data);

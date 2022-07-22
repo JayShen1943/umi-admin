@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2022-06-29 12:49:15
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-18 13:04:17
+ * @LastEditTime: 2022-07-22 11:47:02
  */
 import { useState } from 'react';
 // import { SwapOutlined } from '@ant-design/icons';
@@ -45,6 +45,16 @@ const Login = () => {
       username: postData.telephone,
       password: rsaEncrypt(postData.password) as string,
     });
+    // 测试账号登录
+    if (postData.telephone === 'admin' && postData.password === 'admin') {
+      dispatch({
+        type: 'global/setToken',
+        payload: 'admin',
+      });
+      history.push('/');
+      message.success('登录成功');
+      return
+    }
     if (res.code === 200) {
       dispatch({
         type: 'global/setUserInfo',
@@ -83,6 +93,7 @@ const Login = () => {
                 name="telephone"
                 onChange={onChange}
                 autoComplete="off"
+                placeholder='admin'
               />
               <label>Telephone</label>
             </div>
@@ -92,6 +103,7 @@ const Login = () => {
                 name="password"
                 onChange={onChange}
                 autoComplete="off"
+                placeholder='admin'
               />
               <label>Password</label>
             </div>

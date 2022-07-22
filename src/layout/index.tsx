@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-19 10:04:55
+ * @LastEditTime: 2022-07-22 11:33:48
  */
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Spin, ConfigProvider } from 'antd';
@@ -19,7 +19,7 @@ import Header from "./Header"
 import style from './index.module.less';
 import { history, useDispatch, useSelector } from 'umi';
 import { autoFixContext } from 'react-activation';
-import LogoText from '@/assets/image/logoText.png';
+import LogoText from '@/assets/image/logoText.jpg';
 import Logo from '@/assets/image/logo.png';
 import globalConfig from "@/utils/globalConfig"
 

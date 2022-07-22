@@ -3,7 +3,7 @@
  * @Author: JayShen
  * @Date: 2021-10-30 10:25:49
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-18 16:57:17
+ * @LastEditTime: 2022-07-22 11:35:16
  */
 import CommonBox from '@/common/CommonBox';
 // import { users } from '@/services';
@@ -103,7 +103,7 @@ const Demo = () => {
       value: '#1890FF'
     },
     {
-      label: '宝强绿',
+      label: '有点绿',
       value: '#25b864'
     },
     {

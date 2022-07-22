@@ -3,15 +3,15 @@
  * @Author: JayShen
  * @Date: 2022-06-20 08:47:00
  * @LastEditors: JayShen
- * @LastEditTime: 2022-07-22 09:21:47
+ * @LastEditTime: 2022-07-22 11:44:07
 -->
 
 ## project
-name: deti-mes-admin
+name: umi-admin
 
 version: 1.0.0
 
-description: 得体智造后台管理
+description: 管理后台
 
 author: JayShen
 
@@ -44,8 +44,9 @@ yarn build
 yarn lint
 
 ```
-
-
+## Login 
+Telephone: admin
+Pwssword: admin
 ## Directory tree
 
 ```
